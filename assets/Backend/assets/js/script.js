@@ -792,6 +792,8 @@ $('.table-custum').on('click','.tombolEditAnggota',function(){
     $('.nis').val(respon.nis);
     $('.nisn').val(respon.nisn);
     $('.alamat').val(respon.alamat);
+    $('.loading').css('top', '100%')
+  $('.gambar-loading').css('opacity', '0  ')
     }
 });
 
@@ -1008,27 +1010,26 @@ function simpanDataAnggota(){
             else{
               $('.modalBerhasilUpload .modal-title').append(`
               <p class="text-success">`+data.masuk+` Berhasil Di Upload</p>
-              <p class="text-danger">Data Duplikat berjumlah : `+data.duplikast+` perbaiki data sebelum di upload,</p>
+              <p class="text-danger">Data Duplikat berjumlah : `+data.duplikast+`, Berhasil di update,</p>
               <p class="text-danger">Data NIS Kosong : `+data.nisKosong+` Isi Nis sebelum di upload,</p>
               <p class="text-danger">Data NISN Kosong : `+data.nisnKosong+` Isi Nisn sebelum di upload,</p>
               `)
-              let books=data.anggota;
-              let no=1;
-              for (let index = 0; index < books.length; index++) {
-              
-               $('.informasiUploadAnggota tbody').append(`
-                   <tr>
-                       <td>`+no+++`</td>
-                       <td>`+books[index]['nama']+`</td>
-                       <td>`+books[index]['kelas']+`</td>
-                       <td>`+books[index]['nis']+`</td>
-                       <td>`+books[index]['nisn']+`</td>
-                   </tr>
-               `)
-              }
-             
-                
+              let books=data.update;
             
+              let no=1;
+              $.each(books, function (key, value){
+                console.info(value)
+                $('.informasiUploadAnggota tbody').append(`
+                <tr>
+                    <td>`+no+++`</td>
+                    <td>`+value.nama+`</td>
+                    <td>`+value['kelas']+`</td>
+                    <td>`+value['nis']+`</td>
+                    <td>`+value['nisn']+`</td>
+                </tr>
+            `)
+              })
+
               $('#modalBerhasilUpload').modal('show');
             }
             $('#modalImportAnggota').modal('hide')
@@ -3794,7 +3795,7 @@ function KunjunganPerkelas(){
 
 
 
-
+// $('.dropdown-toggle').dropdown()
 $('.loading').css('top', '100%');
 $('.gambar-loading').css('opacity', '0');
 
