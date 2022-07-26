@@ -1,0 +1,14 @@
+{
+  "name": "perpustakaan",
+  "version": "1.0.0",
+  "description": "pembuatan aplikasi perpustakaan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asep Riki",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.9.4"
+  }
+}

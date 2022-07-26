@@ -1,0 +1,221 @@
+.loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(190, 211, 230, 0.4);
+  z-index: 10000;
+  /* transition: .3s; */
+}
+
+html {
+  position: relative;
+}
+
+html .bulet-besar {
+  top: -120px;
+  left: -90px;
+  z-index: -10000;
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: #f2f036;
+  background: radial-gradient(circle, #f2f036 0%, #ff4200 59%);
+}
+
+.box-grafik {
+  width: 85%;
+  min-height: 540px;
+  background-color: white;
+  margin: 40px auto;
+  border-radius: 10px;
+  -webkit-box-shadow: -5px 5px 9px rgba(0, 0, 0, 0.5);
+          box-shadow: -5px 5px 9px rgba(0, 0, 0, 0.5);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.box-grafik .content-left {
+  position: relative;
+  width: 20%;
+}
+
+.box-grafik .content-left .bulat-sedang {
+  top: 90%;
+  left: -3%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #f2f036;
+  background: radial-gradient(circle, #f2f036 0%, #ff4200 59%);
+}
+
+.box-grafik .content-left .info-hariIni {
+  background-color: #4CB5F5;
+  padding: 8px 10px;
+  border-radius: 0 0 6px 0;
+}
+
+.box-grafik .content-left .info-hariIni h4 {
+  color: #EFF2E7;
+  font-style: italic;
+  font-size: .9em;
+}
+
+.box-grafik .content-left .logo-sekolah {
+  margin: auto;
+  padding: 10px;
+  width: 90px;
+  height: 90px;
+}
+
+.box-grafik .content-left .logo-sekolah img {
+  width: 90px;
+  height: 90px;
+}
+
+.box-grafik .content-left .box-informasi {
+  width: 100%;
+}
+
+.box-grafik .content-left .box-informasi .informasi {
+  margin: auto;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.box-grafik .content-left .box-informasi .informasi .judul-informasi {
+  margin-top: 3px;
+}
+
+.box-grafik .content-left .box-informasi .informasi .judul-informasi h2 {
+  font-size: 1em;
+  color: white;
+  background-color: #4CB5F5;
+  padding: 4px 6px;
+  border-radius: 0 10px 0 10px;
+}
+
+.box-grafik .content-left .box-informasi .informasi .informasiAngka {
+  width: 120px;
+  height: 75px;
+  border: 4px solid #4CB5F5;
+  border-radius: 6px;
+  color: #1B14DB;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.box-grafik .garis-tengah {
+  position: relative;
+  height: 540px;
+  background-color: #EFF2E7;
+  width: 1%;
+}
+
+.box-grafik .garis-tengah .bulet-kecil {
+  top: 50%;
+  bottom: 0;
+  left: -8px;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #FF420E;
+}
+
+.box-grafik .content-right {
+  position: relative;
+  padding: 0 20px;
+  width: 78%;
+}
+
+.box-grafik .content-right .bulat-agak-sedang {
+  bottom: -10%;
+  left: 50%;
+  z-index: 10000;
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #f2f036;
+  background: radial-gradient(circle, #f2f036 0%, #ff4200 59%);
+}
+
+.box-grafik .content-right .judul-Grafix {
+  width: 90%;
+  background-color: #FF420E;
+  padding: 4px 10px;
+  border-radius: 0 0 6px 0;
+}
+
+.box-grafik .content-right .judul-Grafix h4 {
+  color: #EFF2E7;
+  font-style: italic;
+  font-size: .9em;
+}
+
+.box-grafik .content-right #myChart {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.modal .modal-dialog .modal-content {
+  background-color: rgba(235, 235, 235, 0.6);
+}
+
+.modal .modal-dialog .modal-content .modal-header .modal-title {
+  font-size: 2em;
+  font-style: italic;
+  padding: 5px 30px;
+  color: #FF420E;
+  border-radius: 2px;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu input[type=checkbox] {
+  display: none;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu label {
+  display: inline-block;
+  background-color: rgba(235, 235, 235, 0.6);
+  width: 300px;
+  height: 300px;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu label h1 {
+  font-size: 1.2em;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu label img {
+  opacity: 0;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu label.tbl-clik {
+  background-color: rgba(255, 66, 14, 0.6);
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu label.tbl-clik img {
+  opacity: 1;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu label.tbl-clik h1 {
+  color: white;
+}
+
+.modal .modal-dialog .modal-content .modal-body .form-buku-tamu button {
+  margin-top: 10px;
+  background-color: #FF420E;
+  outline: none;
+  border: none;
+  padding: 10px 30px;
+  color: #EFF2E7;
+  font-weight: bold;
+  font-size: 1.3em;
+  border-radius: 7px;
+}
+/*# sourceMappingURL=grafik.css.map */

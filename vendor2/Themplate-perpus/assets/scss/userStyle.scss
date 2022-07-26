@@ -1,0 +1,239 @@
+$bg-Myprimary1:#4CB5F5;
+$bg-Myprimary2:#FF420E;
+$bg-Myprimary3:#1B14DB;
+$bg-Myprimary4:#EBEBEB;
+$textColor1:#EFF2E7;
+// loading
+.loading {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;  
+	background-color: rgba(190, 211, 230, 0.4);
+	z-index: 10000;
+	/* transition: .3s; */
+}
+
+html{
+    position: relative;
+    .bulet-besar{
+        top: -120px;
+        left: -90px;
+     z-index: -10000;
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        background: rgb(242,240,54);
+        background: radial-gradient(circle, rgba(242,240,54,1) 0%, rgba(255,66,0,1) 59%);
+    }
+    
+}
+
+
+    
+    .box-login{
+        // height: 70vh;
+        width: 85%;
+        min-height: 540px;
+        background-color:white;
+        margin: 40px auto;
+        border-radius: 10px;
+        box-shadow: -5px 5px 9px rgba(0,0,0,.5);
+        box-sizing: border-box;
+
+        .content-left{
+            position: relative;
+            // border: 1px solid red;
+            width: 30%;
+            .bulat-sedang{
+                top: 90%;
+                left: -3%;
+                //  z-index: -10000;
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                background: rgb(242,240,54);
+                background: radial-gradient(circle, rgba(242,240,54,1) 0%, rgba(255,66,0,1) 59%);
+            }
+
+            .buku-tamu{
+                width: 250px;
+                // height: 30px;
+                background-color: $bg-Myprimary1;
+                padding: 8px 10px;
+                border-radius: 0 0 6px 0;
+                h4{
+                    color: $textColor1;
+                    font-style: italic;
+                }
+            }
+            .login-title{
+             margin-top: 10px;
+    
+                padding: 10px;
+                h1{
+                    font-style: italic;
+                    font-size: .9em;
+                    color: $bg-Myprimary1;
+                    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+    
+                }
+                h2{
+                    font-size: 1.2em;
+                    font-style: italic;
+                    color: $bg-Myprimary1;
+                    text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+    
+                }
+            }
+            .logo-sekolah{
+                margin: auto;
+                padding: 10px;
+                width: 120px;
+                height: 120px;
+               
+              
+                img{
+                    width: 100px;
+                    height: 100px;
+                }
+    
+            }
+    
+            .form-login{
+                margin-top: 20px;
+                input[type=text]{
+                    width: 80%;
+                    height: 40px;
+                    padding: 8px;
+                    border: 2px solid $bg-Myprimary1;
+                    border-radius: 10px 0px 10px;
+                   
+                    &:focus{
+                        border: 2px solid $bg-Myprimary2;
+
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .garis-tengah{
+            position: relative;
+            height: 540px;
+            background-color:$textColor1;
+            width: 1%;
+
+            .bulet-kecil{
+                top: 50%;
+                bottom: 0;
+                left: -8px;
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                border-radius: 15px;
+                background-color: $bg-Myprimary2;
+            }
+        }
+
+        .content-right{
+            position: relative;
+            padding: 20px;
+            width: 68%;
+            .bulat-agak-sedang{
+                top: 90%;
+                left: 50%;
+                 z-index: 10000;
+                position: absolute;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                background: rgb(242,240,54);
+                background: radial-gradient(circle, rgba(242,240,54,1) 0%, rgba(255,66,0,1) 59%);
+            }
+            .owl-carousel{
+                margin-top: 40px;
+            }
+            .buku-terbaru{
+                position: absolute;
+                top:0;
+                left:-6px;
+                width: 250px;
+                // height: 30px;
+                background-color: $bg-Myprimary2;
+                padding: 8px 10px;
+                border-radius: 0 0 6px 0;
+                h4{
+                    color: $textColor1;
+                    font-style: italic;
+                }
+            }
+        }
+
+    }
+
+     // modal
+
+     .modal{
+        .modal-dialog{
+            .modal-content{
+                background-color: rgba($bg-Myprimary4, $alpha:.6);
+                .modal-header{
+                    .modal-title{
+                        font-size: 2em;
+                        font-style: italic;
+                        padding: 5px 30px;
+                        color: $bg-Myprimary2;
+                        border-radius: 2px;
+                        text-shadow: 3px 3px 3px rgba(0,0,0,.3);
+                    }
+                }
+                .modal-body{
+                .form-buku-tamu{
+                    input[type=checkbox]{
+                        display: none;
+                    }
+                    label{
+                        display: inline-block;
+                        background-color: rgba($bg-Myprimary4,.6);
+                        width: 300px;
+                        height: 300px;
+                        h1{
+                            font-size: 1.2em;
+                        }
+                        img{
+                            opacity: 0;
+                        }
+                        &.tbl-clik{
+                        background-color: rgba($bg-Myprimary2,.6) ;
+                        img{
+                            opacity: 1;
+                        }
+                        h1{
+                            color: white;
+                        }
+
+                        }
+                    }
+                    button{
+                        margin-top: 10px;
+                        background-color: $bg-Myprimary2;
+                        outline: none;
+                        border: none;
+                        padding: 10px 30px;
+                        color: $textColor1;
+                        font-weight: bold;
+                        font-size: 1.3em;
+                        border-radius: 7px;
+                    }
+                }
+                 
+                 
+                }
+            }
+
+        }
+    }

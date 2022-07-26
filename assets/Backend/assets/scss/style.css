@@ -1,0 +1,565 @@
+.container-custum {
+  padding: 10px;
+  margin-top: 0;
+  height: 100vh;
+}
+
+.container-custum .sidebar-left {
+  width: 24%;
+  background-color: #4CB5F5;
+  border-radius: 20px 0px 20px 0px;
+  padding: 20px;
+  min-height: 88vh;
+}
+
+.container-custum .sidebar-left .profil {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.container-custum .sidebar-left .profil .gambar-profil {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  margin: auto;
+}
+
+.container-custum .sidebar-left .profil .gambar-profil img {
+  border-radius: 50%;
+}
+
+.container-custum .sidebar-left .profil .gambar-profil .online {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: greenyellow;
+  left: 9px;
+  bottom: 0;
+}
+
+.container-custum .sidebar-left .profil .title-profil h5 {
+  color: #EFF2E7;
+  font-size: .9rem;
+}
+
+.container-custum .sidebar-left .profil .title-profil h6 {
+  margin-top: -7px;
+  color: #EFF2E7;
+  font-size: .7rem;
+}
+
+.container-custum .sidebar-left .judul-sidebar {
+  margin-top: 10px;
+}
+
+.container-custum .sidebar-left .judul-sidebar h6 {
+  color: #EFF2E7;
+  font-size: 18px;
+}
+
+.container-custum .sidebar-left .judul-sidebar hr {
+  height: 1px;
+  background-color: #EFF2E7;
+  margin: 2px auto;
+}
+
+.container-custum .sidebar-left .sidebar-content .btn-custum {
+  background-color: #FF420E;
+  width: 100px;
+  height: 42px;
+  text-align: center;
+  color: #EFF2E7;
+  font-size: 17px;
+  margin: 10px 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.container-custum .sidebar-left .sidebar-content .btn-custum-2 {
+  background-color: #FF420E;
+  width: 200px;
+  height: 42px;
+  text-align: center;
+  color: #EFF2E7;
+  font-size: 18px;
+  margin: 5px 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container-custum .sidebar-left .sidebar-content .bg-blue {
+  background-color: #1B14DB;
+  font-size: 16px;
+}
+
+.container-custum .content {
+  width: 75%;
+}
+
+.container-custum .content .header {
+  background-color: #4CB5F5;
+  width: 100%;
+  height: 70px;
+  padding: 5px;
+}
+
+.container-custum .content .header .jmlpengunjung h4 {
+  font-size: .8em;
+}
+
+.container-custum .content .header .jmlpengunjung .jumlahp {
+  width: 116px;
+  height: 54px;
+  background-color: #EFF2E7;
+  border-radius: 10px;
+}
+
+.container-custum .content .header .logo-sekolah h4 {
+  color: #EFF2E7;
+}
+
+.container-custum .content .header .logo-sekolah h6 {
+  color: #EFF2E7;
+}
+
+.container-custum .content .main {
+  padding: 20px 0;
+}
+
+.container-custum .content .main .main-left {
+  width: 70%;
+  height: 50px;
+}
+
+.container-custum .content .main .main-left input[type=text] {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #4CB5F5;
+  width: 60%;
+  background-image: url("../img/icon/barcode.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container-custum .content .main .main-left input[type=text]:focus {
+  border: 2px solid #1B14DB;
+  outline: none;
+}
+
+.container-custum .content .main .main-left .content-cari {
+  position: relative;
+}
+
+.container-custum .content .main .main-left .content-cari .list-group {
+  max-height: 450px;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.container-custum .content .main .main-left .content-cari .list-group .list-group-item {
+  background-color: rgba(218, 218, 218, 0.9);
+}
+
+.container-custum .content .main .main-left .content-cari .list-group .list-group-item a {
+  text-decoration: none;
+}
+
+.container-custum .content .main .main-left .inputKodeBuku {
+  display: none;
+}
+
+.container-custum .content .main .main-left .table-custum {
+  margin-top: 20px;
+  overflow: auto;
+  height: 57vh;
+}
+
+.container-custum .content .main .main-left .table-custum table thead tr {
+  background-color: #4CB5F5;
+}
+
+.container-custum .content .main .main-left .table-custum table thead tr th {
+  border-right: 1px solid White;
+  text-align: center;
+  color: #FF420E;
+  font-size: .8rem;
+}
+
+.container-custum .content .main .main-left .table-custum table tbody tr td {
+  border: 1px solid #4CB5F5;
+  padding: 4px;
+}
+
+.container-custum .content .main .main-left .table-custum table tbody tr td .btn-hapus {
+  background-color: #FF420E;
+  border: none;
+}
+
+.container-custum .content .main .main-left .table-custum table tbody tr td .btn-hapus:hover {
+  background-color: #4CB5F5;
+  border: none;
+}
+
+.container-custum .content .main .main-left .button-proses {
+  background-color: #FF420E;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container-custum .content .main .main-left .button-reset {
+  background-color: #1B14DB;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container-custum .content .main .main-left .button-reset-pinjaman-paket {
+  background-color: #1B14DB;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container-custum .content .main .main-left .button-reset-pengembalian {
+  background-color: #1B14DB;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container-custum .content .main .main-left .btn-kembali-reg {
+  background-color: #4CB5F5;
+  border: none;
+  color: #EBEBEB;
+}
+
+.container-custum .content .main .main-left .btn-kembali-reg:hover {
+  background-color: #FF420E;
+}
+
+.container-custum .content .main .main-left .btn-kembali-reg.active {
+  background-color: #FF420E;
+}
+
+.container-custum .content .main .main-left .tombol-data {
+  margin-top: 10px;
+  padding: 0 2em;
+}
+
+.container-custum .content .main .main-left .tombol-data h2 {
+  font-size: 1.2em;
+  color: #4CB5F5;
+}
+
+.container-custum .content .main .main-left .pencarian-data-transaksi {
+  margin-top: 10px;
+  padding: .8em 2em;
+  border: 1px solid #FF420E;
+  border-radius: 3px;
+}
+
+.container-custum .content .main .main-left .pencarian-data-transaksi h2 {
+  font-size: 1.2em;
+  color: #4CB5F5;
+  padding: 0;
+}
+
+.container-custum .content .main .main-left .pencarian-data-transaksi p {
+  padding: 0;
+}
+
+.container-custum .content .main .main-left .container-data-peminjaman {
+  overflow: auto;
+  max-height: 350px;
+}
+
+.container-custum .content .main .main-right {
+  background-color: #EBEBEB;
+  width: 28%;
+  border-radius: 0 20px 0 20px;
+  padding: 10px;
+  height: 76vh;
+  position: relative;
+}
+
+.container-custum .content .main .main-right .titel-main-right1 {
+  top: -10px;
+  left: 0;
+  position: absolute;
+  background-color: #FF420E;
+  width: 200px;
+  padding: 1px 6px;
+  border-radius: 0px 10px 0px 10px;
+}
+
+.container-custum .content .main .main-right .titel-main-right1 h4 {
+  color: white;
+  font-size: .9em;
+}
+
+.container-custum .content .main .main-right .titel-main-right {
+  margin-left: -20px;
+  margin-top: 10px;
+  background-color: #FF420E;
+  width: 200px;
+  padding: 1px 6px;
+  border-radius: 0px 10px 0px 10px;
+}
+
+.container-custum .content .main .main-right .titel-main-right h4 {
+  color: white;
+  font-size: .9em;
+}
+
+.container-custum .content .main .main-right .box-user {
+  margin-top: 20px;
+}
+
+.container-custum .content .main .main-right .box-user .foto-user, .container-custum .content .main .main-right .box-user .foto-user {
+  width: 70px;
+  height: 70px;
+  border: solid 1px #4CB5F5;
+  border-radius: 20px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.container-custum .content .main .main-right .box-user .foto-user img, .container-custum .content .main .main-right .box-user .foto-user img {
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+}
+
+.container-custum .content .main .main-right .box-user .name-user, .container-custum .content .main .main-right .box-user .name-user1 {
+  padding-top: 10px;
+}
+
+.container-custum .content .main .main-right .box-user .name-user h6, .container-custum .content .main .main-right .box-user .name-user1 h6 {
+  font-size: .9em;
+  margin-top: -10px;
+}
+
+.container-custum .content .main .main-right .box-user .table-user .table tr th, .container-custum .content .main .main-right .box-user .table-user .table1 tr th {
+  font-size: .7em;
+  font-weight: bold;
+}
+
+.container-custum .content .main .main-right .box-user .table-user .table tr td, .container-custum .content .main .main-right .box-user .table-user .table1 tr td {
+  font-size: .7em;
+  color: #FF420E;
+}
+
+.container-custum .content .main .main-right .box-informasi {
+  margin-top: 5px;
+  padding: 6px;
+  border: 1px solid #4CB5F5;
+  border-radius: 0px 10px 0px 10px;
+}
+
+.container-custum .content .main .main-right .box-informasi h1 {
+  font-size: .9em;
+  color: #4CB5F5;
+}
+
+.container-custum .content .main .main-right .box-informasi .des-informasi {
+  margin-bottom: 1px;
+}
+
+.container-custum .content .main .main-right .box-informasi .des-informasi p {
+  font-size: .7em;
+}
+
+.container-custum .content .main .main-right .box-informasi .table, .container-custum .content .main .main-right .box-informasi .table1 {
+  font-size: .6em;
+}
+
+.container-custum .content .main .main-right .box-informasi .btn-informasi {
+  margin-top: -6px;
+  background-color: #1B14DB;
+  border: none;
+  color: white;
+  font-size: .7em;
+  padding: 4px 20px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.container-custum .content .main .main-right .box-tentang-aplikasi {
+  margin-top: 10px;
+}
+
+.container-custum .content .main .main-right .box-tentang-aplikasi h2 {
+  font-size: .7em;
+}
+
+.container-custum .content .main .main-right .box-tentang-aplikasi p {
+  font-size: .7em;
+}
+
+.container-custum .footer {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #4CB5F5;
+  height: 60px;
+  padding: 0 20px;
+}
+
+.container-custum .footer a.btn-setting {
+  background-color: #1B14DB;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.container-custum .footer a.btn-keluar {
+  background-color: #FF420E;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.container-custum .modal .modal-dialog .modal-content {
+  background-color: rgba(235, 235, 235, 0.6);
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-header .modal-title {
+  padding: 5px 30px;
+  color: #FF420E;
+  border-radius: 2px;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-body button {
+  padding: 14px;
+  font-size: 1.1em;
+}
+
+@media print {
+  .container-custum .modal .modal-dialog {
+    display: none;
+  }
+  .container-custum .modal .modal-dialog .modal-content {
+    display: none;
+  }
+  .container-custum .modal .modal-dialog .modal-content .modal-header {
+    display: none;
+  }
+  .container-custum .modal .modal-dialog .modal-content .modal-header .modal-title {
+    display: none;
+  }
+  .container-custum .modal .modal-dialog .modal-content .modal-body {
+    display: none;
+  }
+  .container-custum .sidebar-left {
+    display: none;
+  }
+  .container-custum .footer {
+    display: none;
+  }
+  .container-custum .footer a.btn-setting {
+    display: none;
+  }
+  .container-custum .footer a.btn-keluar {
+    display: none;
+  }
+  .container-custum .main-right {
+    display: none !important;
+  }
+  .container-custum .main-left {
+    display: none;
+  }
+  .container-custum .content {
+    display: none;
+  }
+}
+
+.bukti-peminjaman-Buku-Paket {
+  display: none;
+}
+
+.bukti-peminjaman-Buku-Paket h2 {
+  font-size: 1.3em;
+}
+
+.bukti-peminjaman-Buku-Paket h3 {
+  font-size: .9em;
+}
+
+.bukti-peminjaman-Buku-Paket .table tr {
+  font-size: .8em;
+}
+
+.bukti-peminjaman-Buku-Paket .table tr td p {
+  line-height: 1px;
+}
+
+@media print {
+  @page :first {
+    margin-top: -2cm;
+  }
+  @page :left {
+    margin-right: 1cm;
+  }
+  /* target right (odd-numbered) pages only */
+  @page :right {
+    margin-left: .9cm;
+  }
+  .bukti-peminjaman-Buku-Paket {
+    color: black;
+    display: unset;
+  }
+}
+
+.modaDataTransaksi .modal-dialog .modal-content {
+  width: 100%;
+  background-color: rgba(235, 235, 235, 0.6);
+}
+
+.modaDataTransaksi .modal-dialog .modal-content .modal-header .modal-title {
+  padding: 5px 30px;
+  color: #FF420E;
+  border-radius: 2px;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
+}
+
+.modaDataTransaksi .modal-dialog .modal-content .modal-body button {
+  padding: 14px;
+  font-size: 1.1em;
+}
+
+.modaDataTransaksi .modal-dialog .modal-content .modal-body .judul-pinjaman {
+  font-size: 1.2rem;
+  color: #FF420E;
+}
+/*# sourceMappingURL=style.css.map */

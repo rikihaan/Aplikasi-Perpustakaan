@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perpustakaan SMP NEGERI 1 CIGOMVONG</title>
+    <!-- bostrap csss -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/scss/style.css">
+</head>
+<body>
+<!-- CONTAINER UTAMA -->
+<div class="container-custum d-flex justify-content-between flex-wrap">
+    <div class="sidebar-left">
+        <!-- profil -->
+        <div class="profil">
+            <div class="gambar-profil">
+                <div class="online"></div>
+                <img src="https://placeimg.com/90/90/animals" alt="">
+            </div>
+            <div class="title-profil">
+                <h5>Sri Mulyati,S.Pd.</h5>
+                <h6>Pustakawan</h6>
+            </div>
+        </div>
+        <!-- sidebar -->
+        <div class="judul-sidebar">
+            <h6>Data Master</h6>
+            <hr>
+        </div>
+        <div class="sidebar-content d-flex justify-content-between flex-wrap">
+            <button class="btn-custum btn" data-toggle="modal" data-target="#ModalTambahBuku">Buku</button>
+            <button class="btn-custum btn">Anggota</button>
+            <button class="btn-custum btn">Kategori</button>
+            <button class="btn-custum btn">Pengguna</button>
+        </div>
+        <div class="judul-sidebar">
+            <h6>Oprasional</h6>
+            <hr>
+        </div>
+        <div class="sidebar-content d-flex justify-content-between flex-wrap">
+            <button class="btn-custum bg-blue btn">Peminjaman</button>
+            <button class="btn-custum bg-blue btn">Pengembalian</button>
+            <button class="btn-custum bg-blue btn">Buku Paket</button>
+            <button class="btn-custum bg-blue btn">Kehilangan</button>
+        </div>
+        <div class="sidebar-content d-flex justify-content-center flex-wrap">
+            <button class="btn-custum-2 bg-blue btn">Tambah Informasi</button>
+            <button class="btn-custum-2 bg-blue btn">Registrasi Kartu</button>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="header d-flex flex-row justify-content-between">
+            <div class="jmlpengunjung">
+                <h4>Jumlah Pengunjung</h4>
+                <div class="jumlahp"></div>
+            </div>
+            <div class="logo-sekolah">
+                <h4>Perpustakaan</h4>
+                <h6>SMP NEGERI 1 CIGOMBONG</h6>
+            </div>
+            <div class="tanggal-box ">
+                <div class="tanggal">
+                    20 September 2021
+                </div>
+                <div class="jam">
+                    08:09:09
+                </div>
+            </div>
+        </div>
+
+        <div class="main d-flex flex-row justify-content-between">
+            <!-- main left -->
+           <div class="main-left">
+               <div class="table-custum">
+                   <table class="table table-sm">
+                       <thead>
+                           <tr>
+                               <th>No</th>
+                               <th>Kode Buku</th>
+                               <th>Judul Buku</th>
+                               <th>Tahun</th>
+                               <th>Aksi</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>1</td>
+                               <td>B090192</td>
+                               <td>Tau Aja deh</td>
+                               <td>2012</td>
+                               <td class="text-center">
+                                   <button class="btn btn-sm btn-danger btn-hapus">
+                                        Hapus
+                                   </button>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+           <!-- end main left -->
+           
+
+           <!-- main right -->
+           <div class="main-right">
+                <div class="titel-main-right1 d-flex">
+                        <h4 class="align-items-center">Informasi User</h4>
+                </div>
+                <!-- box-user -->
+                <div class="box-user d-flex flex-row flex-wrap">
+                    <div class="foto-user">
+                        <img src="https://placeimg.com/90/90/animals" alt="">
+                    </div>
+                    <div class="name-user align-items-center">
+                        <h6>Asep Riki</h6>
+                        <h6>PER-090909209</h6>
+                        <h6>20 September 2021</h6>
+                    </div>
+                    <div class="table-user">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Kelas</th>
+                                    <td>:</td>
+                                    <td>VVII-1</td>
+                                </tr>
+                                <tr>
+                                    <th>NIS/NISN</th>
+                                    <td>:</td>
+                                    <td>12130032/0090920029</td>
+                                </tr>
+                                <tr>
+                                    <th>Jml Kunjungan</th>
+                                    <td>:</td>
+                                    <td>190K</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- end box user -->
+                <div class="titel-main-right d-flex">
+                    <h4 class="align-items-center">Informasi Lainya</h4>
+                </div>
+                <div class="box-informasi">
+                    <div class="des-informasi">
+                        <p>Terdapat <b>20</b> Buku yang sudah dikembalikan. Cek Dibawah ini</p>
+                    </div>
+                    <button class="btn-informasi">Cek</button>
+                </div>
+                <!-- end box informasi -->
+                <div class="titel-main-right d-flex">
+                    <h4 class="align-items-center">Tentang Aplikasi</h4>
+                </div>
+                <div class="box-tentang-aplikasi">
+                    <h2>Aplikasi Perpustakaan</h2>
+                    <p>V 0.0.1</p>
+                </div>
+           </div>
+        </div>
+
+    </div>
+
+    <div class="footer d-flex justify-content-end">
+        <button class="btn-setting">Setting</button>
+        <button class="btn-keluar">Keluar</button>
+    </div>
+
+    <!-- modal tambah Data-->
+    <div class="modal fade " id="ModalTambahBuku" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ModalTambahBukuLabel" aria-hidden="true"> 
+        <!-- modal dialog -->
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <!-- modal hedader -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tambah Data Buku</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <!-- end modal header -->
+                <div class="modal-body">
+                    <!-- form -->
+                    <form>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Judul Buku</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Kategori Buku</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Judul Buku</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                      </form>
+                    <!-- end form -->
+                </div>
+            </div>
+            <!-- end modal  -->
+
+        </div>
+        <!-- end modal dialog -->
+    </div>
+    <!-- end modal data -->
+</div>
+
+
+
+    
+
+<!-- jquer -->
+<script src="assets/js/jquery-3.5.1.min.js"></script>
+<!-- bootrap -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- main javascrip -->
+<script src="assets/js/script.js"></script>
+</body>
+</html>

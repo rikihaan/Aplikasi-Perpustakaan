@@ -1,0 +1,316 @@
+$bg-Myprimary1:#4CB5F5;
+$bg-Myprimary2:#FF420E;
+$bg-Myprimary3:#1B14DB;
+$bg-Myprimary4:#EBEBEB;
+$textColor1:#EFF2E7;
+
+
+
+
+// sidebar-left
+.container-custum{
+  
+    padding: 10px;
+    margin-top: 0;
+    // sidebar
+  
+    .sidebar-left{
+        width: 24%;
+        background-color: $bg-Myprimary1;
+        border-radius: 20px 0px 20px 0px;
+        padding: 20px;
+
+        .profil{
+            margin-top: 20px;
+            text-align: center;
+
+            .gambar-profil{
+                position: relative;
+                width: 90px;
+                height: 90px;
+                text-align: center;
+                margin: auto;
+
+                img{
+                    border-radius: 50%;
+                }
+                .online{
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 8px;
+                    background-color: greenyellow;
+                    left: 9px;
+                    bottom: 0;
+                    // top: 1px;
+                }
+            }
+            .title-profil{
+                h5{
+                    color: $textColor1;
+                    font-size: .9rem;
+                }
+                h6{
+                    margin-top: -7px;
+                    color: $textColor1;
+                    font-size: .7rem;
+
+                }
+            }
+
+        }
+        
+        .judul-sidebar{
+            margin-top: 10px;
+            h6{
+                color: $textColor1;
+                font-size: 18px;
+            }
+            hr{
+                height: 1px;
+               background-color: $textColor1;
+               margin: 2px auto;
+            }
+        }
+
+        .sidebar-content{
+          
+            .btn-custum{
+                // padding: 9px 30px;
+                background-color:#FF420E;
+                width: 116px;
+                height: 42px;
+                text-align: center;
+                color: $textColor1;
+                font-size: 18px;
+                margin: 5px 5px;
+                box-sizing: border-box;
+                align-items: center;
+                align-self: center;
+            }
+            .btn-custum-2{
+                background-color:#FF420E;
+                width: 200px;
+                height: 42px;
+                text-align: center;
+                color: $textColor1;
+                font-size: 18px;
+                margin: 5px 5px;
+                box-sizing: border-box;
+               
+            }
+            .bg-blue{
+                background-color: $bg-Myprimary3;
+                font-size: 16px;
+            }
+        }
+       
+    }
+
+    // conten
+
+    .content{
+        width: 75%;
+        .header{
+            background-color: $bg-Myprimary1;
+            width: 100%;
+            height: 70px;
+            padding: 5px;
+            .jmlpengunjung{
+                h4{
+                    font-size: .8em;
+                }
+                .jumlahp{
+                    width: 116px;
+                    height: 54px;
+                    background-color: $textColor1;
+                    border-radius: 10px;
+                }
+            }
+            // logo/namaSekolah
+            .logo-sekolah{
+                h4{
+                    color: $textColor1;
+                }
+                h6{
+                    color: $textColor1;
+                }
+            }
+
+            
+        }
+
+        // main
+        .main{
+            padding: 20px 0;
+            // main left
+            .main-left{
+                // background-color: $bg-Myprimary4;
+                width: 98%;
+                height: 50px;
+                input[type=text]{
+                    margin-top: 20px;
+                    background-color: white;
+                    border-radius: 10px;
+                    border:2px solid $bg-Myprimary1;
+                    width: 60%;
+                    background-image: url('../img/icon/barcode.png');
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    &:focus{
+                    border:2px solid $bg-Myprimary3;
+                    outline:none;
+
+                    }
+                }
+                // table
+                .table-custum{
+                    margin-top: 20px;
+                    table{
+                        thead{
+                            tr{
+                                background-color: $bg-Myprimary1;
+                                th{
+                                    border-right: 1px solid White;
+                                    text-align: center;
+                                    color: $bg-Myprimary2;
+                                }
+                            }
+                        }
+
+                        tbody{
+
+                            tr{
+                                td{
+                                    border: 1px solid $bg-Myprimary1;
+                                    color: $bg-Myprimary1;
+                                    padding:4px;
+
+                                    .btn-hapus{
+                                        background-color: $bg-Myprimary2;
+                                        border: none;
+
+                                        &:hover{
+                                        background-color: $bg-Myprimary1;
+                                        border: none;
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                // button proses
+                .button-proses{
+                    background-color: $bg-Myprimary2;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    padding: 8px 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                }
+                
+        
+        
+                .barcode-box{
+                    margin: auto;
+                    padding: 10px;
+                    width: 50%;
+                    max-height: 70vh;
+                    // border: 2px solid red;
+                    overflow-y: auto;
+                    box-sizing: border-box;
+                }
+                .barcode{
+                    margin: 3px 0;
+                    p{
+                        text-align: center;
+                        font-size: .4em;
+                    }
+                }
+                
+            }
+            // end main left
+
+
+            
+        }
+    }
+
+    .footer{
+        width: 100%;
+        margin-top: 10px;
+        background-color: $bg-Myprimary1;
+        height: 60px;
+        padding: 0 20px;
+
+        button.btn-setting{
+            background-color: $bg-Myprimary3;
+            border: none;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        button.btn-keluar{
+            background-color: $bg-Myprimary2;
+            border: none;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+
+        }
+    }
+
+    // modal
+
+    .modal{
+        .modal-dialog{
+            .modal-content{
+                background-color: rgba($bg-Myprimary4, $alpha:.3);
+                .modal-header{
+                    .modal-title{
+                        
+                        padding: 5px 30px;
+                        color: $bg-Myprimary2;
+                        border-radius: 2px;
+                        text-shadow: 3px 3px 3px rgba(0,0,0,.3);
+                    }
+                }
+                .modal-body{
+                    label{
+                        color: $bg-Myprimary2;
+                        font-weight: bold;
+                    }
+                    input[type=text]{
+                        background-color: rgba(0,0,0,.1);
+                        border:2px solid $bg-Myprimary1;
+                        color: white;
+                        width: 80%;
+                    }
+                    select{
+                        background-color: rgba(0,0,0,.1);
+                        border:2px solid $bg-Myprimary1;
+                        color: white;
+                        width: 80%;
+                        option{
+                            color: $bg-Myprimary2;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+
+// css untuk halaman login
+
+
+
+// end css halaman login

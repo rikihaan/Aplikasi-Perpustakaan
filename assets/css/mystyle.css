@@ -1,0 +1,59 @@
+.loading {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(190, 211, 230, 0.8);
+	z-index: 10000;
+	/* transition: .3s; */
+}
+
+.logo-dinas,
+.logo-sek {
+	width: 100px;
+
+}
+
+.pemerintah {
+	font-size: 24px;
+	text-align: center;
+}
+
+.dinas {
+	font-size: 24px;
+	line-height: .8em;
+	/* font-weight: bold; */
+}
+
+.alamat {
+	font-size: 12px !important;
+
+}
+
+.sekolah {
+	font-weight: bold;
+}
+
+table input[type="text"] {
+	width: 50px;
+	border-radius: 2px;
+	text-align: center;
+
+}
+
+.prestasiForm {
+	display: none;
+}
+
+.card-body #pendaftar {
+	font-size: .7em;
+}
+
+.card-body #tabelVerifikasi {
+	font-size: .7em;
+}
+
+/* .modal-content {
+	pa
+} */

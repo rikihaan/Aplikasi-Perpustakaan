@@ -1,0 +1,700 @@
+ // ========================kumpulan data Get Secara Ajax
+    // get all Data Buku
+    public function GetDataBukuAll(){
+
+    }
+
+  // ==================== End Kumpulan Data Ajax
+
+  public function getDataBuku(){
+    // 
+  }
+
+  public function getDataAnggota(){
+    // 
+  }
+
+
+  public function verifiksai()
+  {
+    $data['title'] = 'SuksesVerifikasi';
+    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    if ($this->item_m->simpanVerifikasi($_POST) > 0) {
+      $data['koreg'] = $_POST['koregSen'];
+      $data['id'] = $_POST['id'];
+      echo json_encode($data);
+    } else {
+      $data['koreg'] = $_POST['koregSen'];
+      $data['id'] = $_POST['id'];
+      $data['pesan'] = false;
+      echo json_encode($data);
+    }
+    // $data['pendaftar'] = $this->db->get_where('pendaftar', ['koreg' => $koreg])->row_array();
+    // $this->load->view('themplate/admin/header', $data);
+    // $this->load->view('themplate/admin/sidebar', $data);
+    // $this->load->view('themplate/admin/topbar', $data);
+    // $this->load->view('Admin/SuksesVerifikasi', $data);
+    // $this->load->view('themplate/admin/footer', $data);
+  }
+
+  // statistik
+
+  public function statistik()
+  {
+    $data['daftar'] = $this->db->get('pendaftar')->num_rows();
+    $data['proses'] = $this->daftar->getJumlahDaftar(1);
+    $data['verifikasi'] = $this->daftar->getJumlahDaftar(2);
+    $data['mundur'] = $this->daftar->getJumlahDaftar(3);
+    echo json_encode($data);
+  }
+
+  public function getDataPrestasiById()
+  {
+    echo json_encode($this->db->get_where('prestasi', ['id' => $_POST['id']])->row_array());
+  }
+
+  public function EditMinusNilaiPraktek()
+  {
+    echo json_encode($this->item_m->editNilaiPraktekByTombol($_POST));
+  }
+
+  public function EditMinusNilaiPraktekPlus()
+  {
+    echo json_encode($this->item_m->proseseditNilaiPraktekByTombolPlus($_POST));
+  }
+
+  function get_ajax()
+  {
+    $list = $this->item_m->get_datatables();
+    // var_dump($list);
+    // die;
+    $data = array();
+    $no = @$_POST['start'];
+    foreach ($list as $item) {
+      $no++;
+      $row = array();
+      $row[] = $no . ".";
+      $row[] = $item->koreg;
+      $row[] = $item->namaSiswa;
+      $row[] = $item->namaJalur;
+      $row[] = '<button data-koreg="' . $item->koreg . '" data-id="' . $item->id . '" data-target=".bd-example-modal-lg" class="badge badge-primary viewPendaftar"><i class="fa fa-pencil"></i> View</button> 
+                <a href="' . base_url('Admin/PrintBuktiRegistrasi/') . $item->koreg . '" target="_Blank" class="badge badge-secondary"><i class="fa fa-print" aria-hidden="true"></i> Cetak</a>
+                <a href="' . base_url('Admin/hapusPendaftar/') . $item->id . '" class="badge badge-danger tombolHapus"><i class="fa fa-print" aria-hidden="true"></i> Hapus</a>';
+      $data[] = $row;
+    }
+    $output = array(
+      "draw" => @$_POST['draw'],
+      "recordsTotal" => $this->item_m->count_all(),
+      "recordsFiltered" => $this->item_m->count_filtered(),
+      "data" => $data,
+    );
+    // output to json format
+
+    echo json_encode($output);
+  }
+
+  public function hapusPendaftar($id)
+  {
+    $user = $this->db->get_where('pendaftar', ['id' => $id])->row_array();
+    $this->db->delete('pendaftar', ['id' => $id]);
+    if ($this->db->affected_rows() > 0) {
+      $this->session->set_flashdata('message', '
+      <div class="alert alert-success" role="alert">
+     Data Pendaftar ' . $user['namaSiswa'] . ' berhasil di Hapus!!
+      </div>');
+      redirect('Admin');
+    } else {
+      $this->session->set_flashdata('message', '
+      <div class="alert alert-danger" role="alert">
+     Data Pendaftar ' . $user['namaSiswa'] . ' Gagal di Hapus!!
+      </div>');
+      redirect('Admin');
+    }
+  }
+
+  public function getDataPendaftarById()
+  {
+
+    echo json_encode($this->item_m->getDaftarById($_POST));
+  }
+
+  public function getDataPrestasiByIdDaftar()
+  {
+    $id = $_POST['id'];
+    echo json_encode($this->item_m->getDataPrestasiByIdPendaftar($id));
+  }
+
+
+  // laporan All
+  public function LaporanALL()
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    $data['rangking'] = $this->daftar->rangkingPendaftar();
+    $data['jumlah'] = $this->daftar->getJumlahDataJalur();
+    // var_dump($data['rangking']);
+    // die;
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    $data['pendaftar'] = $this->daftar->getDataPendaftar();
+    $data['tanggal'] = $this->daftar->tanggal_indonesia(date('Y-m-d', strtotime($data['sekolah']['tanggalKelulusan'])));
+    $alamat = $data['sekolah']['alamat'];
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'Legal-P',
+      'margin_left' => 20,
+      'margin_right' => 20,
+      'margin_top' => 60,
+      'margin_bottom' => 30,
+      'margin_header' => 10,
+      'margin_footer' => 10,
+    ]);
+    $html = $this->load->view('Admin/PrintAll', $data, true);
+    $html2 = $this->load->view('Admin/headerForm2', $data, true);
+    $mpdf->SetHTMLHeader($html2);
+    $mpdf->WriteHTML($html);
+    $mpdf->SetHTMLFooter('
+<table width="100%">
+    <tr>
+        <td width="33%" style="font-size:10px;">{DATE j-m-Y}</td>
+        <td width="33%" align="center" style="font-size:10px;">{PAGENO}/{nbpg}</td>
+        <td width="33%" style="text-align: right; font-size:10px;">' . $sekolah  . '</td>
+    </tr>
+</table>');
+    $mpdf->Output();
+  }
+
+  // laporan form 3
+
+  public function form3()
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    // $data['rangking'] = $this->daftar->rangkingPendaftar();
+    // $data['jumlah'] = $this->daftar->getJumlahDataJalur();
+    // var_dump($data['rangking']);
+    // die;
+    $data['tanggal'] = $this->daftar->tanggal_indonesia(date('Y-m-d', strtotime($data['sekolah']['tanggalKelulusan'])));
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    $data['pendaftar'] = $this->daftar->getDataPendaftarDiterima();
+    $alamat = $data['sekolah']['alamat'];
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'Legal-P',
+      'margin_left' => 20,
+      'margin_right' => 20,
+      'margin_top' => 60,
+      'margin_bottom' => 30,
+      'margin_header' => 10,
+      'margin_footer' => 10,
+    ]);
+    $html = $this->load->view('Admin/printform3', $data, true);
+    $html2 = $this->load->view('Admin/headerForm3', $data, true);
+    $mpdf->SetHTMLHeader($html2);
+    $mpdf->WriteHTML($html);
+    $mpdf->SetHTMLFooter('
+    <table width="100%">
+        <tr>
+            <td width="33%" style="font-size:10px;">{DATE j-m-Y}</td>
+            <td width="33%" align="center" style="font-size:10px;">{PAGENO}/{nbpg}</td>
+            <td width="33%" style="text-align: right; font-size:10px;">' . $sekolah  . '</td>
+        </tr>
+    </table>');
+    $mpdf->Output();
+  }
+
+
+  public function cetakBuktiVerifikasi($id)
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    // var_dump($data['rangking']);
+    // die;
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    $logo = $data['sekolah']['logo'];
+    $data['pendaftar'] = $this->item_m->getVerifikasiById($id);
+    $data['tanggalDaftar'] = $this->daftar->tanggal_indonesia($data['pendaftar']['tanggalRegister']);
+    $data['tanggalVerifikasi'] = $this->daftar->tanggal_indonesia(date('Y-m-d'));
+    $alamat = $data['sekolah']['alamat'];
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'A4-L',
+      'margin_left' => 20,
+      'margin_right' => 20,
+      'margin_top' => 12,
+      'margin_bottom' => 0,
+      'margin_header' => 0,
+      'margin_footer' => 5,
+    ]);
+    $html = $this->load->view('Admin/PrintVerifikasi', $data, true);
+    $mpdf->WriteHTML($html);
+    $mpdf->SetHTMLFooter('
+<table width="100%">
+    <tr>
+        <td width="33%" style="font-size:9px;">{DATE j-m-Y}</td>
+        <td width="33%" align="center" style="font-size:8px;">{PAGENO}/{nbpg}</td>
+        <td width="33%" style="text-align: right; font-size:8px;">' . $sekolah  . '</td>
+    </tr>
+</table>');
+    $mpdf->Output();
+  }
+
+
+  public function cetakKelulusan()
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    // var_dump($data['rangking']);
+    // die;
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    $logo = $data['sekolah']['logo'];
+    $data['daftar'] = $this->daftar->getDataLulus();
+    $data['tanggalSurat'] = $this->daftar->tanggal_indonesia(date('Y-m-d', strtotime($data['sekolah']['tanggalKelulusan'])));
+    $alamat = $data['sekolah']['alamat'];
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'A4-P',
+      'margin_left' => 20,
+      'margin_right' => 20,
+      'margin_top' => 16,
+      'margin_bottom' => 0,
+      'margin_header' => 0,
+      'margin_footer' => 4,
+    ]);
+    // ini_set('max_execution_time', '3000');
+    // ini_set("pcre.backtrack_limit", "5000000");
+    $htmlheader = $this->load->view('Admin/footerPrint', $data, true);
+    $html = $this->load->view('Admin/printLulus', $data, true);
+    $mpdf->SetHTMLHeader($htmlheader);
+    $mpdf->WriteHTML($html);
+    $mpdf->Output();
+  }
+
+  public function cetakTidakLulus()
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    // var_dump($data['rangking']);
+    // die;
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    $logo = $data['sekolah']['logo'];
+    $data['daftar'] = $this->daftar->getDataTidakLulus();
+    $data['tanggalSurat'] = $this->daftar->tanggal_indonesia(date('Y-m-d', strtotime($data['sekolah']['tanggalKelulusan'])));
+    $alamat = $data['sekolah']['alamat'];
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'A4-P',
+      'margin_left' => 20,
+      'margin_right' => 20,
+      'margin_top' => 16,
+      'margin_bottom' => 0,
+      'margin_header' => 0,
+      'margin_footer' => 4,
+    ]);
+    // ini_set('max_execution_time', '3000');
+    // ini_set("pcre.backtrack_limit", "5000000");
+    $htmlheader = $this->load->view('Admin/footerPrint', $data, true);
+    $html = $this->load->view('Admin/printTidakLulus', $data, true);
+    $mpdf->SetHTMLHeader($htmlheader);
+    $mpdf->WriteHTML($html);
+    $mpdf->SetHTMLFooter('
+<table width="100%">
+    <tr>
+        <td width="33%" style="font-size:9px;">{DATE j-m-Y}</td>
+        <td width="33%" align="center" style="font-size:8px;">{PAGENO}/{nbpg}</td>
+        <td width="33%" style="text-align: right; font-size:8px;">' . $sekolah  . '</td>
+    </tr>
+</table>');
+    $mpdf->Output();
+  }
+
+  public function formatA1()
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    // jonasi
+    $data['jumlahPendaftarL'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarP'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterima'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterima'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterima'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterima'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindah'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindah'] = $this->db->get_where('pendaftar', ['id_jalur' => 1, 'jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+    // akhir zonasi
+    // blok zonasi afirmasi
+    $data['jumlahPendaftarLAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarPAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterimaAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterimaAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterimaAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterimaAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasiAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasiAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindahAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindahAfirmasi'] = $this->db->get_where('pendaftar', ['id_jalur' => 2, 'jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+
+
+    // JALUR PERPINDAHAN ORANG TUA
+    $data['jumlahPendaftarLOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarPOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterimaOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterimaOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterimaOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterimaOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasiOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasiOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindahOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindahOrangTua'] = $this->db->get_where('pendaftar', ['id_jalur' => 3, 'jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+    // PRESTASI LOMBA AKADEMIK DAN NON AKADEMIK
+    $data['jumlahPendaftarLLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarPLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterimaLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterimaLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterimaLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterimaLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasiLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasiLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindahLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindahLomba'] = $this->db->get_where('pendaftar', ['id_jalur' => 4, 'jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+
+    // JALUR PENDUDUK PERBATASAN KABUPATEN
+    $data['jumlahPendaftarLPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarPPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterimaPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterimaPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterimaPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterimaPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasiPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasiPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindahPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindahPerbatasan'] = $this->db->get_where('pendaftar', ['id_jalur' => 5, 'jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+
+
+    // JALUR PRESTASI RERATA NILAI 
+    $data['jumlahPendaftarLRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarPRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterimaRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterimaRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterimaRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterimaRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasiRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasiRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindahRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindahRaport'] = $this->db->get_where('pendaftar', ['id_jalur' => 6, 'jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+
+    // jumlah
+    $data['jumlahPendaftarLTotal'] = $this->db->get_where('pendaftar', ['jk' => 'L'])->num_rows();
+    $data['jumlahPendaftarPTotal'] = $this->db->get_where('pendaftar', ['jk' => 'P'])->num_rows();
+    $data['jumlahPendaftarLDiterimaTotal'] = $this->db->get_where('pendaftar', ['jk' => 'L', 'lulus' => 4])->num_rows();
+    $data['jumlahPendaftarPDiterimaTotal'] = $this->db->get_where('pendaftar', ['jk' => 'P', 'lulus' => 4])->num_rows();
+    // tidak diterima
+    $data['jumlahPendaftarLTidakDiterimaTotal'] = $this->db->get_where('pendaftar', ['jk' => 'L', 'lulus' => 5])->num_rows();
+    $data['jumlahPendaftarPTidakDiterimaTotal'] = $this->db->get_where('pendaftar', ['jk' => 'P', 'lulus' => 5])->num_rows();
+    // tidak verifikasi
+    $data['jumlahPendaftarLTidakVerifikasiTotal'] = $this->db->get_where('pendaftar', ['jk' => 'L', 'statusPendaftaran' => 1])->num_rows();
+    $data['jumlahPendaftarPTidakVerifikasiTotal'] = $this->db->get_where('pendaftar', ['jk' => 'P', 'statusPendaftaran' => 1])->num_rows();
+    // pindah
+    $data['jumlahPendaftarLPindahTotal'] = $this->db->get_where('pendaftar', ['jk' => 'L', 'statusPendaftaran' => 3])->num_rows();
+    $data['jumlahPendaftarPPindahTotal'] = $this->db->get_where('pendaftar', ['jk' => 'P', 'statusPendaftaran' => 3])->num_rows();
+    $data['tanggal'] = $this->daftar->tanggal_indonesia(date('Y-m-d', strtotime($data['sekolah']['tanggalKelulusan'])));
+
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'legal-L',
+      'margin_left' => 20,
+      'margin_right' => 20,
+      'margin_top' => 65,
+      'margin_bottom' => 0,
+      'margin_header' => 8,
+      'margin_footer' => 10,
+    ]);
+    $htmlheader = $this->load->view('Admin/footerA1', $data, true);
+    $htmlheader2 = $this->load->view('Admin/footerA1', $data, true);
+    $html = $this->load->view('Admin/printA1', $data, true);
+    $html2 = $this->load->view('Admin/printA12', $data, true);
+    $mpdf->SetHTMLHeader($htmlheader);
+    $mpdf->WriteHTML($html);
+    $mpdf->AddPage();
+    $mpdf->SetHTMLHeader($htmlheader2);
+    $mpdf->WriteHTML($html2);
+    $mpdf->SetHTMLFooter('
+<table width="100%">
+    <tr>
+        <td width="33%" style="font-size:9px;">{DATE j-m-Y}</td>
+        <td width="33%" align="center" style="font-size:8px;">{PAGENO}/{nbpg}</td>
+        <td width="33%" style="text-align: right; font-size:8px;">' . $sekolah  . '</td>
+    </tr>
+</table>');
+    $mpdf->Output();
+  }
+
+
+  // exsport data excel
+  public function ExsporExcel()
+  {
+    $data['pendaftar'] = $this->daftar->getDataForExcel();
+    require(APPPATH . 'PHPExcel/Classes/PHPExcel.php');
+    require(APPPATH . 'PHPExcel/Classes/PHPExcel/Writer/Excel2007.php');
+    $object = new PHPExcel();
+    $object->getProperties()->setCreator('Data PPDB');
+    $object->getProperties()->setLastModifiedBy('Data PPDB');
+    $object->getProperties()->setTitle('Data Pendaftar');
+    $object->setActiveSheetIndex(0);
+    $object->getActiveSheet()->setCellValue('A1', 'No');
+    $object->getActiveSheet()->setCellValue('B1', 'No Urut Daftar');
+    $object->getActiveSheet()->setCellValue('C1', 'ID');
+    $object->getActiveSheet()->setCellValue('D1', 'Nama Calon Peserta Didik');
+    $object->getActiveSheet()->setCellValue('E1', 'JK');
+    $object->getActiveSheet()->setCellValue('F1', 'Tempat Lahir');
+    $object->getActiveSheet()->setCellValue('G1', 'Tanggal Lahir');
+    $object->getActiveSheet()->setCellValue('H1', 'USIA');
+    $object->getActiveSheet()->setCellValue('I1', 'NIK');
+    $object->getActiveSheet()->setCellValue('J1', 'NO KK');
+    $object->getActiveSheet()->setCellValue('K1', 'NISN');
+    $object->getActiveSheet()->setCellValue('L1', 'NO HP');
+    $object->getActiveSheet()->setCellValue('M1', 'TINGGI BADAN');
+    $object->getActiveSheet()->setCellValue('N1', 'BERAT BADAN');
+    $object->getActiveSheet()->setCellValue('O1', 'AGAMA');
+    $object->getActiveSheet()->setCellValue('P1', 'Asal Sekolah');
+    $object->getActiveSheet()->setCellValue('Q1', 'NPSN SEKOLAH');
+    $object->getActiveSheet()->setCellValue('R1', 'Jalur');
+    $object->getActiveSheet()->setCellValue('S1', 'ALAMAT');
+    $object->getActiveSheet()->setCellValue('T1', 'RT');
+    $object->getActiveSheet()->setCellValue('U1', 'RW');
+    $object->getActiveSheet()->setCellValue('V1', 'Desa');
+    $object->getActiveSheet()->setCellValue('W1', 'Kecamatan');
+    $object->getActiveSheet()->setCellValue('X1', 'Kota');
+    $object->getActiveSheet()->setCellValue('Y1', 'Provinsi');
+    $object->getActiveSheet()->setCellValue('Z1', 'KODE POS');
+    $object->getActiveSheet()->setCellValue('AA1', 'LONGITUD');
+    $object->getActiveSheet()->setCellValue('AB1', 'NAMA AYAH');
+    $object->getActiveSheet()->setCellValue('AC1', 'NIK AYAH');
+    $object->getActiveSheet()->setCellValue('AD1', 'TAHUN LAHIR  AYAH');
+    $object->getActiveSheet()->setCellValue('AE1', 'PENDIDIKAN  AYAH');
+    $object->getActiveSheet()->setCellValue('AF1', 'PEKERJAAN  AYAH');
+    $object->getActiveSheet()->setCellValue('AG1', 'PENGHASILAN AYAH  AYAH');
+    $object->getActiveSheet()->setCellValue('AH1', 'NAMA IBU');
+    $object->getActiveSheet()->setCellValue('AI1', 'NIK IBU');
+    $object->getActiveSheet()->setCellValue('AJ1', 'TAHUN LAHIR  IBU');
+    $object->getActiveSheet()->setCellValue('AK1', 'PENDIDIKAN  IBU');
+    $object->getActiveSheet()->setCellValue('AL1', 'PEKERJAAN  IBU');
+    $object->getActiveSheet()->setCellValue('AM1', 'PENGHASILAN IBU  IBU');
+    $object->getActiveSheet()->setCellValue('AN1', 'TOTAL NILAI');
+    $object->getActiveSheet()->setCellValue('AO1', 'JUMLAH RATA RATA NILAI');
+    $object->getActiveSheet()->setCellValue('AP1', 'NILAI PRESTASI');
+    $object->getActiveSheet()->setCellValue('AQ1', 'CABANG PRESTASI');
+    $object->getActiveSheet()->setCellValue('AR1', 'TOTAL JARAK');
+    $object->getActiveSheet()->setCellValue('AS1', 'TANGGAL DAFTAR');
+    $object->getActiveSheet()->setCellValue('AT1', 'VERIFIKASI BY');
+    $object->getActiveSheet()->setCellValue('AU1', 'Status');
+    $object->getActiveSheet()->setCellValue('AV1', 'Kel Rombel');
+    $baris = 2;
+    $no = 1;
+    foreach ($data['pendaftar'] as $daftar) {
+      $object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+      $object->getActiveSheet()->setCellValue('B' . $baris, $daftar->noUrut);
+      $object->getActiveSheet()->setCellValue('C' . $baris, $daftar->koreg);
+      $object->getActiveSheet()->setCellValue('D' . $baris, $daftar->namaSiswa);
+      $object->getActiveSheet()->setCellValue('E' . $baris, $daftar->jk);
+      $object->getActiveSheet()->setCellValue('F' . $baris, $daftar->tempatLahirSiswa);
+      $object->getActiveSheet()->setCellValue('G' . $baris, $daftar->tanggalLahirSiswa);
+      $object->getActiveSheet()->setCellValue('H' . $baris, $daftar->usiaSiswa);
+      $object->getActiveSheet()->setCellValueExplicit('I' . $baris, $daftar->nikSiswa, PHPExcel_Cell_DataType::TYPE_STRING);
+      $object->getActiveSheet()->setCellValueExplicit('J' . $baris, $daftar->noKK, PHPExcel_Cell_DataType::TYPE_STRING);
+      $object->getActiveSheet()->setCellValue('K' . $baris, $daftar->nisnSiswa);
+      $object->getActiveSheet()->setCellValue('L' . $baris, $daftar->noHp);
+      $object->getActiveSheet()->setCellValue('M' . $baris, $daftar->tinggiBadan);
+      $object->getActiveSheet()->setCellValue('N' . $baris, $daftar->beratBadan);
+      $object->getActiveSheet()->setCellValue('O' . $baris, $daftar->agama);
+      $object->getActiveSheet()->setCellValue('P' . $baris, $daftar->asalSekolah);
+      $object->getActiveSheet()->setCellValue('Q' . $baris, $daftar->npsnSekolah);
+      $object->getActiveSheet()->setCellValue('R' . $baris, $daftar->ppdb);
+      $object->getActiveSheet()->setCellValue('S' . $baris, $daftar->alamat);
+      $object->getActiveSheet()->setCellValue('T' . $baris, $daftar->rt);
+      $object->getActiveSheet()->setCellValue('U' . $baris, $daftar->rw);
+      $object->getActiveSheet()->setCellValue('V' . $baris, $daftar->desaNya);
+      $object->getActiveSheet()->setCellValue('W' . $baris, $daftar->kecamatanNya);
+      $object->getActiveSheet()->setCellValue('X' . $baris, $daftar->kotaNya);
+      $object->getActiveSheet()->setCellValue('Y' . $baris, $daftar->provinsiNya);
+      $object->getActiveSheet()->setCellValue('Z' . $baris, $daftar->kodePos);
+      $object->getActiveSheet()->setCellValue('AA' . $baris, $daftar->longitude);
+      $object->getActiveSheet()->setCellValue('AB' . $baris, $daftar->namaAyah);
+      $object->getActiveSheet()->setCellValueExplicit('AC' . $baris, $daftar->nikAyah, PHPExcel_Cell_DataType::TYPE_STRING);
+      $object->getActiveSheet()->setCellValue('AD' . $baris, $daftar->tahunLahirAyah);
+      $object->getActiveSheet()->setCellValue('AE' . $baris, $daftar->pendidikanAyah);
+      $object->getActiveSheet()->setCellValue('AF' . $baris, $daftar->pekerjaanAyah);
+      $object->getActiveSheet()->setCellValue('AG' . $baris, $daftar->penghasilanAyah);
+      $object->getActiveSheet()->setCellValue('AH' . $baris, $daftar->namaIbu);
+      $object->getActiveSheet()->setCellValueExplicit('AI' . $baris, $daftar->nikIbu, PHPExcel_Cell_DataType::TYPE_STRING);
+      $object->getActiveSheet()->setCellValue('AJ' . $baris, $daftar->tahunLahirIbu);
+      $object->getActiveSheet()->setCellValue('AK' . $baris, $daftar->pendidikanIbu);
+      $object->getActiveSheet()->setCellValue('AL' . $baris, $daftar->pekerjaanIbu);
+      $object->getActiveSheet()->setCellValue('AM' . $baris, $daftar->penghasilanIbu);
+      $object->getActiveSheet()->setCellValue('AN' . $baris, $daftar->totalNilai);
+      $object->getActiveSheet()->setCellValue('AO' . $baris, $daftar->jumlahRataRata);
+      $object->getActiveSheet()->setCellValue('AP' . $baris, $daftar->nilaiPrestasi);
+      $object->getActiveSheet()->setCellValue('AQ' . $baris, $daftar->cabangPrestasi);
+      $object->getActiveSheet()->setCellValue('AR' . $baris, $daftar->totalJarak);
+      $object->getActiveSheet()->setCellValue('AS' . $baris, $daftar->tanggalRegister);
+      $object->getActiveSheet()->setCellValue('AT' . $baris, $daftar->prosesBy);
+      $status = '';
+      if ($daftar->statusPendaftaran == 1) {
+        $status = 'Belum Verifikasi';
+      } elseif ($daftar->statusPendaftaran == 3) {
+        $status = 'Cabut Berkas / Pindah';
+      } elseif ($daftar->lulus == 4) {
+        $status = 'Diterima';
+      } elseif ($daftar->lulus == 5) {
+        $status = 'Tidak Diterima';
+      } else {
+        $status = 'Terverifikasi';
+      }
+      $object->getActiveSheet()->setCellValue('AU' . $baris, $status);
+      $object->getActiveSheet()->setCellValue('AV' . $baris, $daftar->kelRombel);
+      $baris++;
+    }
+    $file_name = "Data Pendaftar" . '.xlsx';
+    $object->getActiveSheet()->setTitle("Data Pendaftar");
+    header('Content-Type:application/vnd.openxmlFormats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition:attachment; filename="' . $file_name . '"');
+    header('Cache-Control:max-age=0');
+    ob_clean();
+    ob_end_clean();
+    $writer = PHPExcel_IOFactory::createWriter($object, 'Excel2007');
+    $writer->save('php://output');
+    exit;
+  }
+
+  public function PrintBuktiRegistrasi($koreg)
+  {
+    $data['sekolah'] = $this->db->get('kop_surat')->row_array();
+    $sekolah = $data['sekolah']['nama_sekolah'];
+    $query = "SELECT `jalur_ppdb`.`ppdb`, `pendaftar`.*,`villages`.`name` as desa, `districts`.`name` as kec, `regencies`.`name` as kot,`provinces`.`name` as prov
+    FROM `pendaftar` 
+    JOIN `jalur_ppdb` ON `pendaftar`.`id_jalur`=`jalur_ppdb`.`id`
+    JOIN `villages` ON `pendaftar`.`desa`=`villages`.`id`
+    JOIN `districts` ON `villages`.`district_id`=`districts`.`id`
+    JOIN `regencies` ON `districts`.`regency_id`=`regencies`.`id`
+    JOIN `provinces` ON `regencies`.`province_id`=`provinces`.`id`
+    WHERE `pendaftar`.`koreg`=$koreg
+    ";
+    $query2 = "SELECT `prestasi`.`kejuaraan`,`score`,`pendaftar`.*, `kat_satuan`.*,`kategori_penyelengara`.*
+          FROM `pendaftar` 
+          JOIN `prestasi` ON `pendaftar`.`idPrestasi`=`prestasi`.`id`
+          JOIN `kat_satuan` ON `prestasi`.`id_satuan`=`kat_satuan`.`id_satuan`
+          JOIN `kategori_penyelengara` ON `kat_satuan`.`id_penyelengara`=`kategori_penyelengara`.`id_penyelengara`
+          WHERE `pendaftar`.`koreg`=$koreg
+          ";
+    $data['prestasi'] = $this->db->query($query2)->row_array();
+    $data['siswa'] = $this->db->query($query)->row_array();
+    $data['sarat'] = $this->db->get_where('persyaratan', ['id_jalur' => $data['siswa']['id_jalur']])->result_array();
+    $data['setting'] = $this->db->get('kop_surat')->row_array();
+    // $this->load->view('Home/CetakRegistrasi', $data);
+    $mpdf = new \Mpdf\Mpdf([
+      'format' => 'Legal-P',
+      'margin_left' => 22,
+      'margin_right' => 20,
+      'margin_top' => 20,
+      'margin_bottom' => 0,
+      'margin_header' => 0,
+      'margin_footer' => 0,
+    ]);
+    $html = $this->load->view('Home/CetakRegistrasi', $data, true);
+    $html2 = $this->load->view('Home/perjanjianMutlakOrangtua', $data, true);
+    $mpdf->WriteHTML($html);
+    $mpdf->AddPage();
+    $mpdf->WriteHTML($html2);
+    $mpdf->SetHTMLFooter('
+ <table width="100%">
+     <tr>
+         <td width="33%" style="font-size:8px;">{DATE j-m-Y}</td>
+         <td width="33%" align="center" style="font-size:8px;">{PAGENO}/{nbpg}</td>
+         <td width="33%" style="text-align: right; font-size:8px;">' . $sekolah  . '</td>
+     </tr>
+ </table>');
+    $mpdf->Output();
+  }
+
+  public function Lampiran()
+  {
+    $data['pendaftar'] = $this->daftar->getDataLulusExcel();
+    $sekolah = $this->db->get_where('kop_surat', ['id' => 1])->row_array();
+    require(APPPATH . 'PHPExcel/Classes/PHPExcel.php');
+    require(APPPATH . 'PHPExcel/Classes/PHPExcel/Writer/Excel2007.php');
+    $object = new PHPExcel();
+    $object->getProperties()->setCreator('Lampiran SK Diterima');
+    $object->getProperties()->setLastModifiedBy('Data PPDB');
+    $object->getProperties()->setTitle('Data Pendaftar');
+    $object->setActiveSheetIndex(0);
+    $object->getActiveSheet()->setCellValue('A1', 'Lampiran');
+    $object->getActiveSheet()->setCellValue('B1', ':');
+    $object->getActiveSheet()->setCellValue('C1', 'SURAT KEPUTUSAN KEPALA ' . $sekolah['nama_sekolah']);
+    $object->getActiveSheet()->setCellValue('A2', 'Nomor');
+    $object->getActiveSheet()->setCellValue('B2', ':');
+    $object->getActiveSheet()->setCellValue('C2',  $sekolah['no_surat']);
+    $object->getActiveSheet()->setCellValue('A3', 'Tanggal');
+    $object->getActiveSheet()->setCellValue('B3', ':');
+    $object->getActiveSheet()->setCellValue('C3',  $sekolah['tanggalKelulusan']);
+    $sheet = $object->getActiveSheet();
+    $style = array(
+      'alignment' => array(
+        'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+        'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+      )
+    );
+    $sheet->getStyle("A6")->applyFromArray($style);
+    $sheet->getStyle("A7")->applyFromArray($style);
+    $sheet->getStyle("A8")->applyFromArray($style);
+    $sheet->getStyle("A11")->applyFromArray($style);
+    $sheet->getStyle("A12")->applyFromArray($style);
+    $sheet->getStyle("B12")->applyFromArray($style);
+    $sheet->getStyle("C11")->applyFromArray($style);
+    $sheet->getStyle("D11")->applyFromArray($style);
+    $sheet->getStyle("E11")->applyFromArray($style);
+    $sheet->setCellValueByColumnAndRow(0, 6, 'DAFTAR NAMA CALON PESERTA DIDIK BARU YANG DITERIMA');
+    $sheet->setCellValueByColumnAndRow(0, 7, 'PADA PENERIMAAN PESERTA DIDIK BARU');
+    $sheet->setCellValueByColumnAndRow(0, 8, 'TAHUN PELAJARAN 2020/2021');
+    $sheet->setCellValueByColumnAndRow(0, 11, 'Nomor');
+    $sheet->mergeCells('A6:E6');
+    $sheet->mergeCells('A7:E7');
+    $sheet->mergeCells('A8:E8');
+    $sheet->mergeCells('A11:B11');
+    $sheet->mergeCells('C11:C12');
+    $sheet->mergeCells('D11:D12');
+    $sheet->mergeCells('E11:E12');
+    $object->getActiveSheet()->setCellValue('A12', 'Urut');
+    $object->getActiveSheet()->setCellValue('B12', 'Daftar');
+    $object->getActiveSheet()->setCellValue('C11', 'Nama Lengkap');
+    $object->getActiveSheet()->setCellValue('D11', 'Sekolah Asal');
+    $object->getActiveSheet()->setCellValue('E11', 'Jalur PPDB');
+    $baris = 13;
+    $no = 1;
+    foreach ($data['pendaftar'] as $daftar) {
+      $sheet->getStyle('A' . $baris)->applyFromArray($style);
+      $sheet->getStyle('B' . $baris)->applyFromArray($style);
+      $object->getActiveSheet()->setCellValue('A' . $baris, $no++);
+      $object->getActiveSheet()->setCellValue('B' . $baris, $daftar->koreg);
+      $object->getActiveSheet()->setCellValue('C' . $baris, $daftar->namaSiswa);
+      $object->getActiveSheet()->setCellValue('D' . $baris, $daftar->asalSekolah);
+      $object->getActiveSheet()->setCellValue('E' . $baris, $daftar->ppdb);
+      $baris++;
+    }
+    $file_name = "Lampiran SK Diterima" . '.xlsx';
+    $object->getActiveSheet()->setTitle("Lampiran SK Diterima");
+    header('Content-Type:application/vnd.openxmlFormats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition:attachment; filename="' . $file_name . '"');
+    header('Cache-Control:max-age=0');
+    ob_clean();
+    $writer = PHPExcel_IOFactory::createWriter($object, 'Excel2007');
+    $writer->save('php://output');
+    exit;
+  }

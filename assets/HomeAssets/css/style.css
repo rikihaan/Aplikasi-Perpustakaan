@@ -1,0 +1,753 @@
+body {
+	font-family: 'Montserrat';
+	position: relative;
+}
+
+.loading {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(33, 71, 93, .8);
+	z-index: 10000;
+	/* display: none; */
+}
+
+.prestasi {
+	display: none;
+}
+
+.error {
+	color: red;
+}
+
+.navbar {
+	background-color: #1f3c4d;
+	border-bottom: 1px solid #21475d;
+}
+
+label {
+	font-size: .8em;
+	color: #21475d;
+}
+
+.navbar .nav-item {
+	margin-right: 35px;
+}
+
+.nav-item.active a {
+	color: #edc01c !important;
+}
+
+
+/* carossel */
+.carousel {
+	/* background-color: #1f3c4d; */
+	background-image: url('../img/bg/bg.jpg');
+	background-attachment: fixed;
+	/* background-size: cover; */
+	background-repeat: no-repeat;
+	/* background-position: 0, 5px; */
+	height: 450px;
+}
+
+.carousel-item {
+	height: 450px;
+	width: 100%;
+}
+
+.logoSlider {
+	margin-top: 6em;
+	margin-right: -3em;
+
+}
+
+.carousel .carousel-item h1 {
+	text-transform: uppercase;
+	font-family: 'lora';
+	font-weight: 200;
+	color: white;
+}
+
+.carousel .carousel-item h3 {
+	color: #babfbd;
+	line-height: 70px;
+}
+
+/* batas carossel */
+
+
+/* informasi  */
+
+.judul h3 {
+	color: #1f3c4d;
+	font-family: 'lora';
+	font-size: 2.2rem;
+	line-height: 1.5rem;
+}
+
+.judul p {
+	color: #babfbd;
+	font-size: 0.8rem;
+}
+
+
+
+.bulet {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: aqua;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	opacity: 0;
+	animation: bulatBesar .95s infinite ease-in;
+}
+
+.form-informasi img {
+	width: 100px;
+
+}
+
+
+/* formulir */
+
+.formulir {
+	margin-top: 100px;
+	min-height: 550px;
+
+}
+
+.formulir .card-header {
+	background-color: #1f3c4d;
+	color: #edc01c;
+}
+
+.formulir input[type=text] {
+	border-radius: 10px;
+	border: 1px solid #1f3c4d;
+	box-shadow: 0px 1px 6px rgba(0, 0, 0, .7);
+	transition: .3s ease-in;
+}
+
+.formulir input[type=text]:focus {
+
+	outline: none;
+	background-color: #21475d;
+	color: white;
+	transform: translate(0, 5px);
+}
+
+.formulir input[type=select] {
+	border-radius: 15px;
+}
+
+.formulir .card {
+	/* border: #21475d 3px solid; */
+	box-shadow: 4px 6px 9px rgba(0, 0, 0, .7);
+}
+
+
+
+.buletInfo {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	border: 1px solid #edc01c;
+	top: -30px;
+	right: -20px;
+	box-shadow: 4px 4px 5px rgba(33, 71, 93, 9);
+	padding: 0;
+
+}
+
+.buletInfo p {
+	color: white;
+	font-size: 11px;
+	text-align: center;
+	margin: 0;
+
+}
+
+.judul-ppdb {
+	position: relative;
+	width: 200px;
+	padding: 5px;
+	border-radius: 10px 0px 10px 10px;
+	background-color: rgba(33, 71, 93, .8);
+	box-shadow: 5px 5px 3px rgba(237, 192, 28, .9);
+}
+
+.judul-ppdb h2 {
+	font-size: 12px;
+	font-weight: bold;
+	color: wheat;
+	text-shadow: 2px 2px 4px rgba(33, 71, 93, 9);
+}
+
+
+
+/* form cek data */
+.form-cekdata {
+	width: 100%;
+	background-color: #babfbd;
+	border-radius: 0px 20px 20px 20px;
+	box-shadow: 9px 9px 9px rgba(0, 0, 0, .7);
+}
+
+.judul-cekdata {
+	width: 60%;
+	padding: 10px;
+	height: 40px;
+	background-color: #1f3c4d;
+	border-radius: 0px 0px 20px 20px;
+	box-shadow:
+		0px 9px 4px #edc01c;
+}
+
+.judul-cekdata h1 {
+	font-size: 20px;
+	color: #fff;
+	font-style: italic;
+}
+
+.form-cekdata [type=text] {
+	display: inline-block;
+	margin-top: 30px;
+	border-top: none;
+	background-image: url('../img/logo/lock.png');
+	background-repeat: no-repeat;
+	background-size: 1.7em;
+	background-position: 36.4em .2em;
+	border-bottom: 5px solid #1f3c4d;
+}
+
+.hasil-cekdata {
+	font-size: 1em;
+	display: none;
+}
+
+.daftarForm {
+	display: none;
+}
+
+@keyframes bulatBesar {
+	0% {
+		transform: scale(4);
+		/* transition: .1s; */
+
+	}
+
+	25% {
+		transform: scale(6);
+		opacity: 0.2;
+		background-color: orange;
+		/* transition: .1s; */
+
+
+	}
+
+	50% {
+		transform: scale(12);
+		opacity: 0.4;
+		background-color: rgb(255, 81, 0);
+		/* transition: .1s; */
+
+
+	}
+
+	75% {
+
+		transform: scale(24);
+		opacity: 0.4;
+		background-color: rgb(7, 168, 18);
+		/* transition: .1s; */
+	}
+
+	100% {
+		transform: scale(48);
+		/* transition: .1s; */
+		background-color: aqua;
+
+		opacity: 0;
+
+
+	}
+}
+
+/* batas informasi */
+
+
+
+/* tabel informasi */
+.tabel-pedaftaran {
+	height: 350px;
+	background-color: #e5e3e3;
+	padding: 25px 0;
+	margin-bottom: 30rem;
+}
+
+.tab-content {
+	background-color: #fff;
+	padding: 30px;
+	border-left: 1px solid #bebaba;
+	border-right: 1px solid #bebaba;
+	border-bottom: 1px solid #bebaba;
+	height: 500px;
+	border-radius: 4px;
+
+}
+
+.noUjian input[type=text] {
+	display: inline-block;
+}
+
+.noUjian #noUjian1 {
+	width: 30px;
+	text-align: center;
+
+}
+
+.noUjian #noUjian2 {
+	width: 50px;
+	text-align: center;
+
+
+}
+
+.noUjian #noUjian3 {
+	width: 40px;
+	text-align: center;
+
+
+}
+
+.noUjian #noUjian4 {
+	width: 55px;
+	text-align: center;
+
+
+}
+
+.noUjian #noUjian5 {
+	width: 55px;
+	text-align: center;
+
+
+}
+
+.noUjian #noUjian6 {
+	width: 30px;
+	text-align: center;
+}
+
+/* tabel input nilai pendaftar */
+table .tr1 input[type=text] {
+	border: 1px solid #e4610a;
+	background-color: #d1d4d6;
+
+}
+
+table input[type=text] {
+	outline: none;
+	width: 100px;
+	display: inline-block;
+	outline: none;
+	text-align: center;
+	border-radius: 3px;
+	background-color: #8faab9;
+	border: 1px solid rgb(46, 43, 226);
+
+}
+
+table input[type=text]:focus {
+	background-color: lightblue;
+
+}
+
+table {
+	font-size: 1.2em;
+}
+
+/* sukse daftar */
+.sukses-pendaftran {
+	margin-top: 100px;
+	height: 450px;
+	min-height: 600px;
+
+}
+
+.sukses-pendaftran h5 {
+	font-family: 'lora';
+	color: #21475d;
+
+}
+
+.sukses-pendaftran .card {
+	padding: 20px 50px;
+}
+
+
+footer {
+	height: 55px;
+	background-color: #171717;
+	padding: 0;
+}
+
+.lanjut {
+	display: none;
+	transition: 2s;
+}
+
+.tabelMinMax {
+	margin-top: 60px;
+
+}
+
+.tabelMinMax table {
+	font-size: 14px;
+	;
+}
+
+.tabelMinMax table th {
+	font-size: 12px;
+
+}
+
+/* .embed-responsive-item {
+	height: 2000px;
+
+} */
+
+.embed-responsive {
+	width: 50%;
+	height: 500px;
+	margin: auto;
+}
+
+.pengumuman p {
+	font-size: .8em;
+	margin: 3px;
+	color: #d5e6e8;
+}
+
+.pengumuman h5 {
+	font-size: 1em;
+	margin: 5px 0;
+	color: #94dbe3;
+}
+
+.pengumuman .btn {
+	padding: 5px;
+	font-size: .7em;
+	color: white;
+}
+
+.pengumuman .card-body {
+	padding: 10px;
+	border-radius: 10px;
+}
+
+/* batas md */
+
+@media only screen and (max-width: 720px) {
+	.pengumuman p {
+		font-size: .4em;
+		margin: 1px;
+	}
+
+	.pengumuman h5 {
+		font-size: .5em;
+		margin: 1px 0;
+	}
+
+	.pengumuman .btn {
+		padding: 4px;
+		font-size: .4em;
+		color: white;
+	}
+
+	.pengumuman .card-body {
+		padding: 3px 5px;
+		border-radius: 3px;
+	}
+
+	.judul-cekdata h1 {
+		font-size: 12px;
+	}
+
+	.hasil-cekdata2 {
+		font-size: 12px;
+	}
+
+
+	/* form cek data user */
+	.form-cekdata {
+		width: 100%;
+	}
+
+	.form-cekdata [type=text] {
+		display: inline-block;
+		margin-top: 30px;
+		border-top: none;
+		background-image: url('../img/logo/lock.png');
+		background-repeat: no-repeat;
+		background-size: 1.7em;
+		/* background-position: 36.4em .2em; */
+		border-bottom: 5px solid #1f3c4d;
+	}
+
+	/* batsa akhir form cek data user */
+
+
+	table input[type=text] {
+		width: 60px;
+		display: inline-block;
+		outline: none;
+		text-align: center;
+		border-radius: 3px;
+		border: 1px solid blueviolet;
+
+	}
+
+	.tab-content table {
+		font-size: .6em;
+	}
+
+	.nav-link {
+		font-size: .5em;
+	}
+
+	.ikon-info {
+		font-size: .5em;
+	}
+
+	.tabelMinMax table {
+		font-size: 9px;
+		;
+	}
+
+	.tabelMinMax table th {
+		font-size: 6px;
+
+	}
+
+	.embed-responsive {
+		width: 80%;
+
+		margin: auto;
+	}
+
+	table {
+		font-size: .9em;
+	}
+
+	table tr td {
+		text-align: left;
+	}
+
+	.noUjian input[type=text]:nth-child(5) {
+		width: 60px;
+		display: inline-block;
+		outline: none;
+		text-align: center;
+
+	}
+
+	.noUjian input[type=text]:nth-child(6) {
+		width: 60px;
+		display: inline-block;
+		outline: none;
+		text-align: center;
+
+	}
+
+
+
+	small {
+		font-size: .5em !important;
+
+	}
+
+	label {
+		font-size: .5em;
+		color: #21475d;
+	}
+
+
+	/* informasi  */
+
+	.judul h3 {
+		color: #1f3c4d;
+		font-family: 'lora';
+		font-size: 1.7em;
+		line-height: 1.5rem;
+	}
+
+	.judul p {
+		color: #babfbd;
+		font-size: 0.8rem;
+	}
+
+
+	/* carossel */
+	.carousel {
+		background-color: #1f3c4d;
+		height: 260px;
+	}
+
+	.carousel .carousel-item h1 {
+		text-transform: uppercase;
+		font-size: 2em;
+		font-family: 'lora';
+		letter-spacing: .1em;
+		color: white;
+		/* line-height: 60px; */
+	}
+
+	.carousel .carousel-item h3 {
+		color: #babfbd;
+		font-size: .8em;
+
+	}
+
+	/* info pendaftaran angka */
+	.infoJudul {
+		font-size: 0.9em;
+	}
+
+	.infoAngka {
+		font-size: 0.6em;
+
+
+	}
+
+	.info-container {
+		height: 100px;
+		width: 300px;
+
+	}
+
+}
+
+/* batas akhir responsif */
+/* reposip di bawah 350 px */
+@media only screen and (max-width: 450px) {
+	.infoJudul {
+		font-size: 0.4em;
+	}
+
+	.infoAngka {
+		font-size: 0.5em;
+	}
+
+	.info-container {
+		height: 70px;
+		width: 200px;
+	}
+
+	.judul p {
+		color: #babfbd;
+		font-size: 0.5rem;
+	}
+
+	.judul h3 {
+		color: #1f3c4d;
+		font-family: 'lora';
+		font-size: 1em;
+		line-height: 1.5rem;
+	}
+
+	.judul-ppdb h2 {
+		font-size: .5em;
+		font-weight: bold;
+		color: wheat;
+		text-shadow: 2px 2px 4px rgba(33, 71, 93, 9);
+	}
+
+	.buletInfo {
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		border-radius: 25px;
+		border: 1px solid #edc01c;
+		top: -30px;
+		right: -20px;
+		box-shadow: 4px 4px 5px rgba(33, 71, 93, 9);
+		padding: 0;
+
+	}
+
+	.judul-ppdb {
+		position: relative;
+		width: 140px;
+		padding: 8px;
+		border-radius: 10px 0px 10px 10px;
+		background-color: rgba(33, 71, 93, .8);
+		box-shadow: 5px 5px 3px rgba(237, 192, 28, .9);
+	}
+
+	.buletInfo p {
+		color: white;
+		font-size: 10px;
+		text-align: center;
+		margin: 0;
+
+	}
+
+	/* carusel */
+	.carousel .carousel-item h1 {
+		text-transform: uppercase;
+		font-family: 'lora';
+		font-size: 23px;
+		font-weight: 200;
+		color: white;
+		/* line-height: 60px; */
+	}
+
+	.carousel .carousel-item h3 {
+		color: #babfbd;
+		line-height: 30px;
+		font-size: 10px;
+
+	}
+
+	.carousel-item a {
+		width: 100px;
+		font-size: 9px;
+
+	}
+
+	.hasil-cekdata {
+		font-size: .6em;
+		display: none;
+	}
+
+	.pengumuman p {
+		font-size: .4em;
+		margin: 1px;
+	}
+
+	.pengumuman h5 {
+		font-size: .5em;
+		margin: 1px 0;
+	}
+
+	.pengumuman .btn {
+		padding: 4px;
+		font-size: .4em;
+		color: white;
+	}
+
+	.pengumuman .card-body {
+		padding: 3px 5px;
+		border-radius: 3px;
+	}
+
+
+
+
+}

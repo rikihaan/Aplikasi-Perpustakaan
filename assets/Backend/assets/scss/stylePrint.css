@@ -1,0 +1,272 @@
+.container-custum {
+  padding: 10px;
+  margin-top: 0;
+}
+
+.container-custum .sidebar-left {
+  width: 24%;
+  background-color: #4CB5F5;
+  border-radius: 20px 0px 20px 0px;
+  padding: 20px;
+}
+
+.container-custum .sidebar-left .profil {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.container-custum .sidebar-left .profil .gambar-profil {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  margin: auto;
+}
+
+.container-custum .sidebar-left .profil .gambar-profil img {
+  border-radius: 50%;
+}
+
+.container-custum .sidebar-left .profil .gambar-profil .online {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: greenyellow;
+  left: 9px;
+  bottom: 0;
+}
+
+.container-custum .sidebar-left .profil .title-profil h5 {
+  color: #EFF2E7;
+  font-size: .9rem;
+}
+
+.container-custum .sidebar-left .profil .title-profil h6 {
+  margin-top: -7px;
+  color: #EFF2E7;
+  font-size: .7rem;
+}
+
+.container-custum .sidebar-left .judul-sidebar {
+  margin-top: 10px;
+}
+
+.container-custum .sidebar-left .judul-sidebar h6 {
+  color: #EFF2E7;
+  font-size: 18px;
+}
+
+.container-custum .sidebar-left .judul-sidebar hr {
+  height: 1px;
+  background-color: #EFF2E7;
+  margin: 2px auto;
+}
+
+.container-custum .sidebar-left .sidebar-content .btn-custum {
+  background-color: #FF420E;
+  width: 116px;
+  height: 42px;
+  text-align: center;
+  color: #EFF2E7;
+  font-size: 18px;
+  margin: 5px 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.container-custum .sidebar-left .sidebar-content .btn-custum-2 {
+  background-color: #FF420E;
+  width: 200px;
+  height: 42px;
+  text-align: center;
+  color: #EFF2E7;
+  font-size: 18px;
+  margin: 5px 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container-custum .sidebar-left .sidebar-content .bg-blue {
+  background-color: #1B14DB;
+  font-size: 16px;
+}
+
+.container-custum .content {
+  width: 75%;
+}
+
+.container-custum .content .header {
+  background-color: #4CB5F5;
+  width: 100%;
+  height: 70px;
+  padding: 5px;
+}
+
+.container-custum .content .header .jmlpengunjung h4 {
+  font-size: .8em;
+}
+
+.container-custum .content .header .jmlpengunjung .jumlahp {
+  width: 116px;
+  height: 54px;
+  background-color: #EFF2E7;
+  border-radius: 10px;
+}
+
+.container-custum .content .header .logo-sekolah h4 {
+  color: #EFF2E7;
+}
+
+.container-custum .content .header .logo-sekolah h6 {
+  color: #EFF2E7;
+}
+
+.container-custum .content .main {
+  padding: 20px 0;
+}
+
+.container-custum .content .main .main-left {
+  width: 98%;
+  height: 50px;
+}
+
+.container-custum .content .main .main-left input[type=text] {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #4CB5F5;
+  width: 60%;
+  background-image: url("../img/icon/barcode.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container-custum .content .main .main-left input[type=text]:focus {
+  border: 2px solid #1B14DB;
+  outline: none;
+}
+
+.container-custum .content .main .main-left .table-custum {
+  margin-top: 20px;
+}
+
+.container-custum .content .main .main-left .table-custum table thead tr {
+  background-color: #4CB5F5;
+}
+
+.container-custum .content .main .main-left .table-custum table thead tr th {
+  border-right: 1px solid White;
+  text-align: center;
+  color: #FF420E;
+}
+
+.container-custum .content .main .main-left .table-custum table tbody tr td {
+  border: 1px solid #4CB5F5;
+  color: #4CB5F5;
+  padding: 4px;
+}
+
+.container-custum .content .main .main-left .table-custum table tbody tr td .btn-hapus {
+  background-color: #FF420E;
+  border: none;
+}
+
+.container-custum .content .main .main-left .table-custum table tbody tr td .btn-hapus:hover {
+  background-color: #4CB5F5;
+  border: none;
+}
+
+.container-custum .content .main .main-left .button-proses {
+  background-color: #FF420E;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.container-custum .content .main .main-left .barcode-box {
+  margin: auto;
+  padding: 10px;
+  width: 50%;
+  max-height: 70vh;
+  overflow-y: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container-custum .content .main .main-left .barcode {
+  margin: 3px 0;
+}
+
+.container-custum .content .main .main-left .barcode p {
+  text-align: center;
+  font-size: .4em;
+}
+
+.container-custum .footer {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #4CB5F5;
+  height: 60px;
+  padding: 0 20px;
+}
+
+.container-custum .footer button.btn-setting {
+  background-color: #1B14DB;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.container-custum .footer button.btn-keluar {
+  background-color: #FF420E;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.container-custum .modal .modal-dialog .modal-content {
+  background-color: rgba(235, 235, 235, 0.3);
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-header .modal-title {
+  padding: 5px 30px;
+  color: #FF420E;
+  border-radius: 2px;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-body label {
+  color: #FF420E;
+  font-weight: bold;
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-body input[type=text] {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid #4CB5F5;
+  color: white;
+  width: 80%;
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-body select {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid #4CB5F5;
+  color: white;
+  width: 80%;
+}
+
+.container-custum .modal .modal-dialog .modal-content .modal-body select option {
+  color: #FF420E;
+}
+/*# sourceMappingURL=stylePrint.css.map */

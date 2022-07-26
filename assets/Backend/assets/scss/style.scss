@@ -1,0 +1,639 @@
+$bg-Myprimary1:#4CB5F5;
+$bg-Myprimary2:#FF420E;
+$bg-Myprimary3:#1B14DB;
+$bg-Myprimary4:#EBEBEB;
+$textColor1:#EFF2E7;
+
+
+
+
+// sidebar-left
+.container-custum{
+  
+    padding: 10px;
+    margin-top: 0;
+    height: 100vh;
+
+    // sidebar
+  
+    .sidebar-left{
+        width: 24%;
+        background-color: $bg-Myprimary1;
+        border-radius: 20px 0px 20px 0px;
+        padding: 20px;
+        min-height: 88vh;
+
+        .profil{
+            margin-top: 20px;
+            text-align: center;
+
+            .gambar-profil{
+                position: relative;
+                width: 90px;
+                height: 90px;
+                text-align: center;
+                margin: auto;
+
+                img{
+                    border-radius: 50%;
+                }
+                .online{
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 8px;
+                    background-color: greenyellow;
+                    left: 9px;
+                    bottom: 0;
+                    // top: 1px;
+                }
+            }
+            .title-profil{
+                h5{
+                    color: $textColor1;
+                    font-size: .9rem;
+                }
+                h6{
+                    margin-top: -7px;
+                    color: $textColor1;
+                    font-size: .7rem;
+
+                }
+            }
+
+        }
+        
+        .judul-sidebar{
+            margin-top: 10px;
+            h6{
+                color: $textColor1;
+                font-size: 18px;
+            }
+            hr{
+                height: 1px;
+               background-color: $textColor1;
+               margin: 2px auto;
+            }
+        }
+
+        .sidebar-content{
+          
+            .btn-custum{
+                // padding: 9px 30px;
+                background-color:#FF420E;
+                width: 100px;
+                height: 42px;
+                text-align: center;
+                color: $textColor1;
+                font-size: 17px;
+                margin: 10px 5px;
+                box-sizing: border-box;
+                align-items: center;
+                align-self: center;
+            }
+            .btn-custum-2{
+                background-color:#FF420E;
+                width: 200px;
+                height: 42px;
+                text-align: center;
+                color: $textColor1;
+                font-size: 18px;
+                margin: 5px 5px;
+                box-sizing: border-box;
+               
+            }
+            .bg-blue{
+                background-color: $bg-Myprimary3;
+                font-size: 16px;
+            }
+        }
+       
+    }
+
+    // conten
+ 
+    .content{
+        width: 75%;
+        .header{
+            background-color: $bg-Myprimary1;
+            width: 100%;
+            height: 70px;
+            padding: 5px;
+            .jmlpengunjung{
+                h4{
+                    font-size: .8em;
+                }
+                .jumlahp{
+                    width: 116px;
+                    height: 54px;
+                    background-color: $textColor1;
+                    border-radius: 10px;
+                }
+            }
+            // logo/namaSekolah
+            .logo-sekolah{
+                h4{
+                    color: $textColor1;
+                }
+                h6{
+                    color: $textColor1;
+                }
+            }
+        }
+
+        // main
+        .main{
+            padding: 20px 0;
+            // main left
+            .main-left{
+                // background-color: $bg-Myprimary4;
+                width: 70%;
+                height: 50px;
+                // position: relative;
+                input[type=text]{
+                    margin-top: 20px;
+                    background-color: white;
+                    border-radius: 10px;
+                    border:2px solid $bg-Myprimary1;
+                    width: 60%;
+                    background-image: url('../img/icon/barcode.png');
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    &:focus{
+                    border:2px solid $bg-Myprimary3;
+                    outline:none;
+
+                    }
+                }
+
+                // style cari anggota berdasarkan nama
+                .content-cari{
+                    position: relative;
+                  
+
+                    // background-color: rgba( #4CB5F5,.7);
+                    .list-group{
+                        max-height: 450px;
+                        overflow: auto;
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        z-index: 1;
+                        .list-group-item{
+                            a{
+                                text-decoration: none;
+                            }
+                        background-color: rgba(#dadada,.9);
+
+                        }
+
+                    }
+                }
+
+                .inputKodeBuku{
+                    display: none; 
+                }
+                // table
+                .table-custum{
+                    margin-top: 20px;
+                    overflow: auto;
+                    height: 57vh;
+                    table{
+                        thead{
+                            tr{
+                                background-color: $bg-Myprimary1;
+                                th{
+                                    border-right: 1px solid White;
+                                    text-align: center;
+                                    color: $bg-Myprimary2;
+                                    font-size: .8rem;
+                                }
+                            }
+                        }
+
+                        tbody{
+
+                            tr{
+                                td{
+                                    border: 1px solid $bg-Myprimary1;
+                                    padding:4px;
+                                    .btn-hapus{
+                                        background-color: $bg-Myprimary2;
+                                        border: none;
+
+                                        &:hover{
+                                        background-color: $bg-Myprimary1;
+                                        border: none;
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                // button proses
+                .button-proses{
+                    background-color: $bg-Myprimary2;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    padding: 8px 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                }
+                  // button reset
+                  .button-reset{
+                    background-color: $bg-Myprimary3;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    padding: 8px 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                }
+
+                .button-reset-pinjaman-paket{
+                    background-color: $bg-Myprimary3;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    padding: 8px 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                }
+                .button-reset-pengembalian{
+                    background-color: $bg-Myprimary3;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    padding: 8px 20px;
+                    border-radius: 10px;
+                    text-align: center;
+                }
+
+                // button jenis pinjaman
+                .btn-kembali-reg{
+                    background-color:$bg-Myprimary1;
+                    border: none;
+                    color: $bg-Myprimary4;
+                    &:hover{
+                        background-color: $bg-Myprimary2;
+                    }
+                    &.active{
+                        background-color: $bg-Myprimary2;
+
+                    }
+                }
+
+                // tombol data transaksi
+                .tombol-data{
+                    margin-top: 10px;
+                    padding: 0 2em;
+                    h2{
+                        font-size: 1.2em;
+                        color: $bg-Myprimary1;
+                    }
+                }
+
+                // pencarian data transaksi
+                .pencarian-data-transaksi
+                {
+                    margin-top: 10px;
+                    padding:.8em 2em;
+                    border: 1px solid $bg-Myprimary2;
+                    border-radius: 3px;
+                    h2{
+                        font-size: 1.2em;
+                        color: $bg-Myprimary1;
+                        padding: 0;
+                    }
+                    p{
+                        padding: 0;
+                    }
+                }
+                // table hasil apencarian data peminjaman
+                .container-data-peminjaman{
+                 
+                        overflow: auto;
+                        max-height: 350px;
+                    
+                }
+            }
+            // end main left
+
+
+            // main-rigt
+            .main-right{
+                background-color: $bg-Myprimary4;
+                width: 28%;
+                border-radius: 0 20px 0 20px;
+                padding: 10px;
+                // padding-right: 20px;
+                height: 76vh;
+                position: relative;
+                .titel-main-right1{
+                    top: -10px;
+                    left: 0;
+                    position: absolute;
+                    background-color: $bg-Myprimary2;
+                    width: 200px;
+                    padding: 1px 6px;
+                    border-radius: 0px 10px 0px 10px;
+                    h4{
+                        color: white;
+                        font-size: .9em;
+                    }
+                
+                }
+                .titel-main-right{
+                    margin-left: -20px;
+                    margin-top: 10px;
+                     background-color: $bg-Myprimary2;
+                     width: 200px;
+
+                     padding: 1px 6px;
+                     border-radius: 0px 10px 0px 10px;
+                     h4{
+                         color: white;
+                         font-size: .9em;
+                     }
+                 
+                 }
+
+                .box-user{
+                    margin-top: 20px;
+                    .foto-user, .foto-user{
+                        width: 70px;height: 70px;
+                        border:solid 1px $bg-Myprimary1;
+                        border-radius: 20px;
+                        margin-right: 10px;
+                        overflow: hidden;
+                        img{
+                            width: 70px;
+                            height: 70px;
+                            border-radius: 20px;
+
+
+                        }
+                        
+                    }
+                    .name-user, .name-user1 {
+                        padding-top: 10px;
+                        h6{
+                            font-size: .9em;
+                            margin-top: -10px;
+                        }
+                    }
+                    .table-user{
+                        .table,.table1{
+                            tr{
+                                th{
+                                    font-size: .7em;
+                                    font-weight: bold;
+                                }
+                                td{
+                                    font-size: .7em;
+                                    color: $bg-Myprimary2;
+                                }
+                            }
+                        }
+                    }
+                }
+                // end box user
+
+                // box informasi
+                .box-informasi{
+                    margin-top: 5px;
+                    padding: 6px ;
+                    border: 1px solid $bg-Myprimary1;
+                    border-radius: 0px 10px 0px 10px;
+                    h1{
+                        font-size: .9em;
+                        color: $bg-Myprimary1;
+                    }
+                    .des-informasi{
+                        margin-bottom: 1px;
+                        p{
+                            font-size: .7em;
+                        }
+                    }
+
+                    .table, .table1{
+                        font-size: .6em;
+                    }
+                    .btn-informasi{
+                        margin-top: -6px;
+                        background-color: $bg-Myprimary3;
+                        border: none;
+                        color: white;
+                        font-size: .7em;
+                        padding: 4px 20px;
+                        font-weight: bold;
+                        border-radius: 6px;
+                    }
+
+                }
+                // end box informasi
+
+                // box-tentang aplikaso
+                .box-tentang-aplikasi{
+                    margin-top: 10px;
+                    h2{
+                        font-size: .7em;
+                    }
+                    p{
+                        font-size: .7em;
+                    }
+                }
+                
+                
+            }
+            // end main right
+        }
+    }
+
+    .footer{
+        width: 100%;
+        margin-top: 10px;
+        background-color: $bg-Myprimary1;
+        height: 60px;
+        padding: 0 20px;
+
+        a.btn-setting{
+            background-color: $bg-Myprimary3;
+            border: none;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            padding: 20px;
+            text-decoration: none;
+        }
+
+        a.btn-keluar{
+            background-color: $bg-Myprimary2;
+            border: none;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            padding: 20px;
+            text-decoration: none;
+
+        }
+    }
+
+    // modal
+
+    .modal{
+        .modal-dialog{
+            .modal-content{
+                background-color: rgba($bg-Myprimary4, $alpha:.6);
+                .modal-header{
+                    .modal-title{
+                        
+                        padding: 5px 30px;
+                        color: $bg-Myprimary2;
+                        border-radius: 2px;
+                        text-shadow: 3px 3px 3px rgba(0,0,0,.7);
+                    }
+                }
+                .modal-body{
+                  button{
+                      padding: 14px;
+                    //   color: #EFF2E7;
+                      font-size: 1.1em;
+                  }
+                   
+                }
+            }
+
+        }
+    }
+
+   
+
+    @media print {
+        
+        .modal{
+            .modal-dialog{
+                display: none;
+                .modal-content{
+                    display: none;
+                    .modal-header{
+                        display: none;
+                        .modal-title{
+                            display: none;
+                        }
+                    }
+                    .modal-body{
+                        display: none;
+                    }
+                }
+            }
+        }
+        .sidebar-left{
+            display: none;
+        }
+        .footer{
+            display: none;
+            a.btn-setting{
+
+                display: none;
+            }
+            a.btn-keluar{
+
+                display: none;
+            }
+
+        }
+        .main-right{
+            display: none !important;
+        }
+       .main-left{
+          display: none;
+       }
+       .content{
+           display: none;
+       }
+    }
+}
+
+.bukti-peminjaman-Buku-Paket{
+    display: none;
+    h2{
+        font-size: 1.3em;
+    }
+    h3{
+        font-size: .9em;
+    }
+    .table{
+        tr{
+            font-size: .8em;
+            td{
+                p{
+                    line-height: 1px;
+                }
+            }
+        }
+    }
+}
+@media print {
+      @page :first {
+        margin-top: -2cm;
+      }
+      
+      @page :left {
+        margin-right: 1cm;
+      }
+      
+      /* target right (odd-numbered) pages only */
+      @page :right {
+        margin-left: .9cm;
+      }
+    .bukti-peminjaman-Buku-Paket{
+        color: black;
+        display: unset;
+    }
+}
+
+ // modal data transaksi peminjaman
+ .modaDataTransaksi{
+    .modal-dialog{
+        .modal-content{
+            width: 100%;
+            background-color: rgba($bg-Myprimary4, $alpha:.6);
+            .modal-header{
+                .modal-title{
+                    padding: 5px 30px;
+                    color: $bg-Myprimary2;
+                    border-radius: 2px;
+                    text-shadow: 3px 3px 3px rgba(0,0,0,.7);
+                }
+            }
+            .modal-body{
+    
+              button{
+                  padding: 14px;
+                //   color: #EFF2E7;
+                  font-size: 1.1em;
+              }
+
+              .judul-pinjaman{
+                  font-size: 1.2rem;
+                  color: $bg-Myprimary2;
+              } 
+               
+            }
+        }
+
+    }
+}
+
+
+// css untuk halaman login
+
+
+
+// end css halaman login
