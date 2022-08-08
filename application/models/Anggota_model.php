@@ -179,4 +179,14 @@ class Anggota_model extends CI_Model
     $this->db->where('nisn', $nisn['nisn']);
     $this->db->update('anggota');
   }
+
+  // export data anggota berdasarkan kelas yang di pilih
+  public function exportDataAnggota($kelas)
+  {
+    $this->db->select('anggota.*, kelas.kelas,kelas.kodeKelas');
+    $this->db->from('anggota');
+    $this->db->join('kelas', 'anggota.kelas = kelas.kodeKelas');
+    $this->db->where('anggota.kelas', $kelas);
+    return $this->db->get()->result_array();
+  }
 }

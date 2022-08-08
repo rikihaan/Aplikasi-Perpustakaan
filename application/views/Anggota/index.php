@@ -29,9 +29,9 @@
               <i class="fas fa-file-export"></i> Exsport Data Anggota
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <?php foreach ($kelas as $key => $value) : ?>
+                <a class="dropdown-item" href="<?= base_url('Anggota/ExportByKelas/') . $value['kelas'] ?>"><?= $value['kelas'] ?></a>
+              <?php endforeach; ?>
             </div>
           </div>
         </div>
@@ -244,7 +244,7 @@
             <tbody>
             </tbody>
           </table>
-        </div>  
+        </div>
       </div>
     </div>
     <!-- end modal  -->

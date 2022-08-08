@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Anggota extends CI_Controller
 {
   public function __construct()
@@ -13,6 +17,7 @@ class Anggota extends CI_Controller
   {
     $data['title'] = 'Anggota';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['kelas'] = $this->db->get('kelas')->result_array();
     $this->load->view('themplate/admin/header2', $data);
     $this->load->view('themplate/admin/sidebar', $data);
     $this->load->view('Anggota/index', $data);
@@ -191,5 +196,89 @@ class Anggota extends CI_Controller
       $data['pesan'] = 'error';
       echo json_encode($data);
     }
+  }
+  // export data anggota berdasarkan kelas
+  public function ExportByKelas(string $kelas)
+  {
+    $anggota = $this->anggota->exportDataAnggota($kelas);
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+    $style_col = [
+      'font' => ['bold' => true], // Set font nya jadi bold
+      'alignment' => [
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+      ],
+      'borders' => [
+        'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+        'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+        'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+        'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+      ]
+    ];
+    // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+    $style_row = [
+      'alignment' => [
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+      ],
+      'borders' => [
+        'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+        'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+        'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+        'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+      ]
+    ];
+    // $sheet->setCellValue('A1', "DATA ANGGOTA PERPUSTAKAAN"); // Set kolom A1 dengan tulisan "DATA SISWA"
+    // $sheet->mergeCells('A1:F1'); // Set Merge Cell pada kolom A1 sampai F1
+    // $sheet->getStyle('A1')->getFont()->setBold(true); // Set bold kolom A1
+    // $sheet->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
+    // Buat header tabel nya pada baris ke 3
+    $sheet->setCellValue('A1', "NO"); // Set kolom A3 dengan tulisan "NO"
+    $sheet->setCellValue('B1', "NIS"); // Set kolom B3 dengan tulisan "NIS"
+    $sheet->setCellValue('C1', "NISN"); // Set kolom C3 dengan tulisan "NAMA"
+    $sheet->setCellValue('D1', "NAMA"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
+    $sheet->setCellValue('E1', "Kelas"); // Set kolom E3 dengan tulisan "TELEPON"
+    // Apply style header yang telah kita buat tadi ke masing-masing kolom header
+    $sheet->getStyle('A1')->applyFromArray($style_col);
+    $sheet->getStyle('B1')->applyFromArray($style_col);
+    $sheet->getStyle('C1')->applyFromArray($style_col);
+    $sheet->getStyle('D1')->applyFromArray($style_col);
+    $sheet->getStyle('E1')->applyFromArray($style_col);
+    $no = 1; // Untuk penomoran tabel, di awal set dengan 1
+    $row = 2; // Set baris pertama untuk isi tabel adalah baris ke 4
+    foreach ($anggota as $ang) {
+      $sheet->setCellValue('A' . $row, $no);
+      $sheet->setCellValue('B' . $row, $ang['nis']);
+      $sheet->setCellValue('C' . $row, $ang['nisn']);
+      $sheet->setCellValue('D' . $row, $ang['nama']);
+      $sheet->setCellValue('E' . $row, $ang['kodeKelas']);
+      // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
+      $sheet->getStyle('A' . $row)->applyFromArray($style_row);
+      $sheet->getStyle('B' . $row)->applyFromArray($style_row);
+      $sheet->getStyle('C' . $row)->applyFromArray($style_row);
+      $sheet->getStyle('D' . $row)->applyFromArray($style_row);
+      $sheet->getStyle('E' . $row)->applyFromArray($style_row);
+      $sheet->getStyle('A' . $row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom No
+      $sheet->getStyle('B' . $row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT); // Set text left untuk kolom NIS
+      $sheet->getRowDimension($row)->setRowHeight(20); // Set height tiap row
+      $no++; // Tambah 1 setiap kali looping
+      $row++; // Tambah 1 setiap kali looping
+    }
+    // Set width kolom
+    $sheet->getColumnDimension('A')->setWidth(5); // Set width kolom A
+    $sheet->getColumnDimension('B')->setWidth(10); // Set width kolom B
+    $sheet->getColumnDimension('C')->setWidth(10); // Set width kolom C
+    $sheet->getColumnDimension('D')->setWidth(35); // Set width kolom D
+    $sheet->getColumnDimension('E')->setWidth(10); // Set width kolom E
+    // Set judul file excel nya
+    $sheet->setTitle("Data Anggota - " . $kelas);
+    // Proses file excel
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="Data Anggota-' . $kelas . '.xlsx"'); // Set nama file excel nya
+    header('Cache-Control: max-age=0');
+    $writer = new Xlsx($spreadsheet);
+    ob_end_clean();
+    $writer->save('php://output');
   }
 }
