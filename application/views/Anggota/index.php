@@ -22,10 +22,31 @@
   <div class="main d-flex flex-row justify-content-between">
     <!-- main left -->
     <div class="main-left">
-      <button class="btn btn-success" id="tombolIportDataAnggotaExcel" data-toggle="modal" data-target="#modalImportAnggota"><i class="fa fas fa-file-excel"> Import Data Excel</i></button>
-      <a href="#" class="btn btn-info"><i class="fas fa-file-export"></i> Exsport Data</i></a>
-      <button class="btn btn-secondary" id="tombolTambahDataAnggota" data-toggle="modal" data-target="#modalTambahAnggota"><i class="fas fa-plus"></i> Tambah Data</i></button>
-      <a href="<?= base_url('assets/Backend/assets/file/FormatUploadanggota.xlsx') ?>" class="btn btn-warning"><i class="fas fa-download"></i> Download format</i></a>
+      <div class="row mt-4">
+        <div class="col">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-file-export"></i> Exsport Data Anggota
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <button class="btn btn-success" id="tombolIportDataAnggotaExcel" data-toggle="modal" data-target="#modalImportAnggota"><i class="fa fas fa-file-excel"> Import Data Excel</i></button>
+        </div>
+
+        <div class="col">
+          <button class="btn btn-secondary" id="tombolTambahDataAnggota" data-toggle="modal" data-target="#modalTambahAnggota"><i class="fas fa-plus"></i> Tambah Data</i></button>
+        </div>
+        <div class="col">
+          <a href="<?= base_url('assets/Backend/assets/file/FormatUploadanggota.xlsx') ?>" class="btn btn-warning"><i class="fas fa-download"></i> Download format</i></a>
+        </div>
+      </div>
+
       <div class="table-custum">
         <table class="display table table-sm" id="anggota">
           <thead>
@@ -223,7 +244,7 @@
             <tbody>
             </tbody>
           </table>
-        </div>
+        </div>  
       </div>
     </div>
     <!-- end modal  -->

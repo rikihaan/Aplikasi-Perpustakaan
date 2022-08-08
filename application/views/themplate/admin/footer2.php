@@ -6,7 +6,8 @@
 <script src="<?= base_url() ?>assets/jquery-validation/dist/jquery.validate.js"></script>
 <script src="<?= base_url() ?>assets/jquery-validation/dist/additional-methods.min.js"></script>
 <!-- bootrap -->
-<!-- <script src="<?= base_url() ?>assets/Backend/assets/js/popper.min.js"></script> -->
+<script src="<?= base_url() ?>assets/Backend/assets/js/popper.min.js"></script>
+<script src="<?= base_url() ?>assets/Backend/assets/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url() ?>assets/Backend/assets/js/bootstrap.min.js"></script>
 <!-- dataTables Javasctp -->
 <script src="<?= base_url() ?>assets/DataTables/datatables.min.js"></script>
